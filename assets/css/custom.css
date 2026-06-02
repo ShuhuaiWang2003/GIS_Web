@@ -1,0 +1,180 @@
+﻿html {
+	scroll-behavior: smooth;
+}
+
+#intro h1 {
+	letter-spacing: 0;
+}
+
+#nav .links a {
+	letter-spacing: 0.03em;
+}
+
+.lab-overview .major p,
+.section-heading p {
+	max-width: 48rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.summary-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+	margin-top: 2rem;
+}
+
+.summary-tile {
+	border: solid 2px #eeeeee;
+	border-radius: 6px;
+	padding: 1.25rem;
+	text-align: left;
+	text-decoration: none;
+	transition: border-color 0.2s ease, transform 0.2s ease;
+	min-height: 12rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.summary-tile:hover {
+	border-color: #18bfef;
+	transform: translateY(-2px);
+}
+
+.summary-code {
+	color: #18bfef;
+	font-family: "Source Sans Pro", Helvetica, sans-serif;
+	font-size: 1.9rem;
+	font-weight: 900;
+	line-height: 1;
+	margin-bottom: 0.8rem;
+}
+
+.summary-tile strong {
+	color: #212931;
+	font-size: 1.05rem;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+
+.summary-tile small {
+	color: #717981;
+	font-size: 0.9rem;
+	margin-top: 0.5rem;
+}
+
+.pollutant-section {
+	padding: 4rem 4rem 2rem 4rem;
+	border-top: solid 2px #eeeeee;
+}
+
+.section-heading {
+	margin-bottom: 2rem;
+	text-align: center;
+}
+
+.map-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 2rem;
+}
+
+.map-card {
+	border: solid 2px #eeeeee;
+	border-radius: 6px;
+	padding: 1.25rem;
+	background: #ffffff;
+}
+
+.map-card h3 {
+	font-size: 1rem;
+	letter-spacing: 0.02em;
+	margin: 1.25rem 0 0.6rem 0;
+}
+
+.map-card p {
+	font-size: 0.95rem;
+	margin-bottom: 0;
+}
+
+.geoserver-slot {
+	align-items: center;
+	background: linear-gradient(135deg, #f4f7f9 0%, #ffffff 100%);
+	border: dashed 2px #b8c2cc;
+	border-radius: 6px;
+	color: #4a5560;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 18rem;
+	padding: 1.5rem;
+	position: relative;
+	text-align: center;
+}
+
+.geoserver-slot:before {
+	content: "";
+	position: absolute;
+	inset: 1rem;
+	border: solid 1px rgba(33, 41, 49, 0.08);
+	pointer-events: none;
+}
+
+.geoserver-slot strong {
+	color: #212931;
+	font-family: "Source Sans Pro", Helvetica, sans-serif;
+	font-size: 1.35rem;
+	font-weight: 900;
+	letter-spacing: 0;
+	line-height: 1.2;
+	margin: 0.7rem 0;
+	position: relative;
+	text-transform: uppercase;
+}
+
+.geoserver-slot p,
+.slot-kicker {
+	position: relative;
+}
+
+.slot-kicker {
+	color: #18bfef;
+	font-size: 0.8rem;
+	font-weight: 900;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+}
+
+.lab-notes {
+	border-top: solid 2px #eeeeee;
+}
+
+.lab-notes h2 {
+	letter-spacing: 0;
+}
+
+@media screen and (max-width: 980px) {
+	.summary-grid,
+	.map-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.pollutant-section {
+		padding: 3rem 2rem 1rem 2rem;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.summary-code {
+		font-size: 1.5rem;
+	}
+
+	.geoserver-slot {
+		min-height: 14rem;
+	}
+
+	.geoserver-slot strong {
+		font-size: 1.05rem;
+	}
+}

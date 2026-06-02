@@ -1,0 +1,220 @@
+﻿<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>GIS Lab 2026 - Air Pollution Maps</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper" class="fade-in">
+
+			<div id="intro">
+				<h1>Air Pollution<br />Mapping</h1>
+				<p>GIS Lab 2026 web preview for PM2.5, PM10, and NO2 map layers. <br />GeoServer image slots are reserved for WMS or exported map images.</p>
+				<ul class="actions">
+					<li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+				</ul>
+			</div>
+
+			<header id="header">
+				<a href="index.html" class="logo">GIS Lab 2026</a>
+			</header>
+
+			<nav id="nav">
+				<ul class="links">
+					<li class="active"><a href="#overview">Overview</a></li>
+					<li><a href="#pm25">PM2.5</a></li>
+					<li><a href="#pm10">PM10</a></li>
+					<li><a href="#no2">NO2</a></li>
+				</ul>
+			</nav>
+
+			<div id="main">
+
+				<article id="overview" class="post featured lab-overview">
+					<header class="major">
+						<span class="date">GIS Laboratory 2026</span>
+						<h2>Air Quality Web Map Collection</h2>
+						<p>This page is a draft structure for displaying pollutant concentration maps. The current version keeps all GeoServer image locations empty and shows clear placeholders for the final map layers.</p>
+					</header>
+					<div class="summary-grid">
+						<a class="summary-tile" href="#pm25">
+							<span class="summary-code">PM2.5</span>
+							<strong>Fine particulate matter</strong>
+							<small>Reserved map slots and layer metadata.</small>
+						</a>
+						<a class="summary-tile" href="#pm10">
+							<span class="summary-code">PM10</span>
+							<strong>Coarse particulate matter</strong>
+							<small>Reserved map slots and layer metadata.</small>
+						</a>
+						<a class="summary-tile" href="#no2">
+							<span class="summary-code">NO2</span>
+							<strong>Nitrogen dioxide</strong>
+							<small>Reserved map slots and layer metadata.</small>
+						</a>
+					</div>
+				</article>
+
+				<section class="pollutant-section" id="pm25">
+					<header class="major section-heading">
+						<span class="date">Category 01</span>
+						<h2>PM2.5</h2>
+						<p>Fine particulate matter map outputs. Replace the empty GeoServer fields when the WMS layers or exported images are ready.</p>
+					</header>
+					<div class="map-grid">
+						<article class="map-card">
+							<div class="geoserver-slot" data-pollutant="pm25" data-geoserver-url="" data-layer="pm25_concentration" data-style="" data-format="image/png">
+								<span class="slot-kicker">GeoServer image placeholder</span>
+								<strong>PM2.5 Concentration Map</strong>
+								<p>Reserved for layer: pm25_concentration</p>
+							</div>
+							<h3>PM2.5 Concentration</h3>
+							<p>Space reserved for the final PM2.5 concentration map from GeoServer.</p>
+						</article>
+						<article class="map-card">
+							<div class="geoserver-slot" data-pollutant="pm25" data-geoserver-url="" data-layer="pm25_classification" data-style="" data-format="image/png">
+								<span class="slot-kicker">GeoServer image placeholder</span>
+								<strong>PM2.5 Classification Map</strong>
+								<p>Reserved for layer: pm25_classification</p>
+							</div>
+							<h3>PM2.5 Classification</h3>
+							<p>Space reserved for a classified PM2.5 output, legend, or thematic layer.</p>
+						</article>
+					</div>
+				</section>
+
+				<section class="pollutant-section" id="pm10">
+					<header class="major section-heading">
+						<span class="date">Category 02</span>
+						<h2>PM10</h2>
+						<p>Coarse particulate matter map outputs. GeoServer image locations are intentionally blank in this draft.</p>
+					</header>
+					<div class="map-grid">
+						<article class="map-card">
+							<div class="geoserver-slot" data-pollutant="pm10" data-geoserver-url="" data-layer="pm10_concentration" data-style="" data-format="image/png">
+								<span class="slot-kicker">GeoServer image placeholder</span>
+								<strong>PM10 Concentration Map</strong>
+								<p>Reserved for layer: pm10_concentration</p>
+							</div>
+							<h3>PM10 Concentration</h3>
+							<p>Space reserved for the final PM10 concentration map from GeoServer.</p>
+						</article>
+						<article class="map-card">
+							<div class="geoserver-slot" data-pollutant="pm10" data-geoserver-url="" data-layer="pm10_classification" data-style="" data-format="image/png">
+								<span class="slot-kicker">GeoServer image placeholder</span>
+								<strong>PM10 Classification Map</strong>
+								<p>Reserved for layer: pm10_classification</p>
+							</div>
+							<h3>PM10 Classification</h3>
+							<p>Space reserved for a classified PM10 output, legend, or thematic layer.</p>
+						</article>
+					</div>
+				</section>
+
+				<section class="pollutant-section" id="no2">
+					<header class="major section-heading">
+						<span class="date">Category 03</span>
+						<h2>NO2</h2>
+						<p>Nitrogen dioxide map outputs. The map containers below are prepared for future GeoServer connections.</p>
+					</header>
+					<div class="map-grid">
+						<article class="map-card">
+							<div class="geoserver-slot" data-pollutant="no2" data-geoserver-url="" data-layer="no2_concentration" data-style="" data-format="image/png">
+								<span class="slot-kicker">GeoServer image placeholder</span>
+								<strong>NO2 Concentration Map</strong>
+								<p>Reserved for layer: no2_concentration</p>
+							</div>
+							<h3>NO2 Concentration</h3>
+							<p>Space reserved for the final NO2 concentration map from GeoServer.</p>
+						</article>
+						<article class="map-card">
+							<div class="geoserver-slot" data-pollutant="no2" data-geoserver-url="" data-layer="no2_classification" data-style="" data-format="image/png">
+								<span class="slot-kicker">GeoServer image placeholder</span>
+								<strong>NO2 Classification Map</strong>
+								<p>Reserved for layer: no2_classification</p>
+							</div>
+							<h3>NO2 Classification</h3>
+							<p>Space reserved for a classified NO2 output, legend, or thematic layer.</p>
+						</article>
+					</div>
+				</section>
+
+				<section class="post lab-notes">
+					<header>
+						<h2>GeoServer Connection Notes</h2>
+					</header>
+					<p>The placeholder blocks already include empty attributes for future GeoServer integration. When the final WMS or image URLs are available, fill in <code>data-geoserver-url</code>, <code>data-layer</code>, <code>data-style</code>, and image source values.</p>
+					<table>
+						<thead>
+							<tr>
+								<th>Pollutant</th>
+								<th>Reserved layer names</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>PM2.5</td>
+								<td>pm25_concentration, pm25_classification</td>
+								<td>Waiting for GeoServer image</td>
+							</tr>
+							<tr>
+								<td>PM10</td>
+								<td>pm10_concentration, pm10_classification</td>
+								<td>Waiting for GeoServer image</td>
+							</tr>
+							<tr>
+								<td>NO2</td>
+								<td>no2_concentration, no2_classification</td>
+								<td>Waiting for GeoServer image</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+			</div>
+
+			<footer id="footer">
+				<section>
+					<h2>Project Information</h2>
+					<p>GIS Lab 2026 air pollution web map draft. Final maps, legends, and analysis text can be added after the GeoServer layers are published.</p>
+				</section>
+				<section class="split contact">
+					<section>
+						<h3>Categories</h3>
+						<p>PM2.5 / PM10 / NO2</p>
+					</section>
+					<section>
+						<h3>Map Source</h3>
+						<p>GeoServer WMS placeholders</p>
+					</section>
+				</section>
+			</footer>
+
+			<div id="copyright">
+				<ul><li>GIS Lab 2026</li><li>Template: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+			</div>
+
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+
