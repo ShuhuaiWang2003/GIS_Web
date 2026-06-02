@@ -189,7 +189,30 @@
 		});
 	}
 
+	function renderOutputViewer(viewer) {
+		var categorySelect = viewer.querySelector(".output-category-select");
+		var panels = viewer.querySelectorAll(".output-panel");
+		var selectedCategory = categorySelect ? categorySelect.value : "";
+
+		panels.forEach(function (panel) {
+			panel.hidden = panel.dataset.outputPanel !== selectedCategory;
+		});
+	}
+
+	function initializeOutputViewer(viewer) {
+		var categorySelect = viewer.querySelector(".output-category-select");
+
+		if (categorySelect) {
+			categorySelect.addEventListener("change", function () {
+				renderOutputViewer(viewer);
+			});
+		}
+
+		renderOutputViewer(viewer);
+	}
+
 	document.addEventListener("DOMContentLoaded", function () {
 		document.querySelectorAll(".pollutant-map-shell").forEach(initializeSimpleMap);
+		document.querySelectorAll(".output-viewer").forEach(initializeOutputViewer);
 	});
 }());

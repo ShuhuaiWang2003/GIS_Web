@@ -163,36 +163,54 @@
 						<div class="pollutant-map" id="pm10-map" data-map-center-lat="42.7" data-map-center-lng="25.4" data-map-zoom="7"></div>
 						<p class="map-status">No overlay selected.</p>
 					</div>
-					<div class="supporting-grid">
-						<article class="supporting-output">
-							<h3>Land Cover Output</h3>
-							<img src="assets/data/landcover/zonal-statistics-lcc.png" alt="Zonal Statistics by Land Cover Change" />
-							<h4>Bulgaria 2021-2023 Data Table</h4>
-							<div class="table-wrapper">
-								<table class="compact-data-table">
-									<thead>
-										<tr>
-											<th>Indicator</th>
-											<th>Value</th>
-											<th>Category</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr><td>stability(persistence)</td><td>0.9493</td><td>N/A (Baseline)</td></tr>
-										<tr><td>Primary source of gain</td><td>0.6216</td><td>Rangeland (code11)</td></tr>
-										<tr><td>Secondary source of gain</td><td>0.3295</td><td>Crops (code5)</td></tr>
-										<tr><td>Third source of gain</td><td>0.0333</td><td>Built (code7)</td></tr>
-										<tr><td>Primary source of destination</td><td>0.8436</td><td>Rangeland (code11)</td></tr>
-										<tr><td>Secondary source of destination</td><td>0.1288</td><td>Crops (code5)</td></tr>
-										<tr><td>Third source of destination</td><td>0.0184</td><td>Built (code7)</td></tr>
-									</tbody>
-								</table>
-							</div>
-						</article>
-						<article class="supporting-output">
-							<h3>Population Output</h3>
-							<img src="assets/data/population/pm10-population-exposure.png" alt="PM10 Population Exposure in Bulgaria 2023" />
-						</article>
+					<div class="output-viewer">
+						<div class="output-toolbar">
+							<label for="output-category">
+								Output Category
+								<select id="output-category" class="output-category-select">
+									<option value="pollution">Pollution</option>
+									<option value="landcover" selected>Land Cover</option>
+									<option value="population">Population</option>
+								</select>
+							</label>
+						</div>
+						<div class="output-display">
+							<article class="output-panel" data-output-panel="pollution" hidden>
+								<h3>Pollution Output</h3>
+								<div class="output-placeholder">
+									<p>No pollution chart or table file is attached yet.</p>
+								</div>
+							</article>
+							<article class="output-panel" data-output-panel="landcover">
+								<h3>Land Cover Output</h3>
+								<img class="output-image" src="assets/data/landcover/zonal-statistics-lcc.png" alt="Zonal Statistics by Land Cover Change" />
+								<h4>Bulgaria 2021-2023 Data Table</h4>
+								<div class="table-wrapper output-table-frame">
+									<table class="compact-data-table">
+										<thead>
+											<tr>
+												<th>Indicator</th>
+												<th>Value</th>
+												<th>Category</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr><td>stability(persistence)</td><td>0.9493</td><td>N/A (Baseline)</td></tr>
+											<tr><td>Primary source of gain</td><td>0.6216</td><td>Rangeland (code11)</td></tr>
+											<tr><td>Secondary source of gain</td><td>0.3295</td><td>Crops (code5)</td></tr>
+											<tr><td>Third source of gain</td><td>0.0333</td><td>Built (code7)</td></tr>
+											<tr><td>Primary source of destination</td><td>0.8436</td><td>Rangeland (code11)</td></tr>
+											<tr><td>Secondary source of destination</td><td>0.1288</td><td>Crops (code5)</td></tr>
+											<tr><td>Third source of destination</td><td>0.0184</td><td>Built (code7)</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</article>
+							<article class="output-panel" data-output-panel="population" hidden>
+								<h3>Population Output</h3>
+								<img class="output-image" src="assets/data/population/pm10-population-exposure.png" alt="PM10 Population Exposure in Bulgaria 2023" />
+							</article>
+						</div>
 					</div>
 				</section>
 
