@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <!--
 	Massively by HTML5 UP
 	html5up.net | @ajlkn
@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>GIS Lab 2026 - GIS Layer Viewer</title>
+		<title>GIS Lab 2026 - Pollutant Layer Viewer</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -19,8 +19,8 @@
 		<div id="wrapper" class="fade-in">
 
 			<div id="intro">
-				<h1>GIS Layer<br />Viewer</h1>
-				<p>GIS Lab 2026 web preview for GeoServer layers from TIF or GPKG sources. <br />Choose a basemap, then display one thematic layer above it.</p>
+				<h1>Pollutant<br />Layer Viewer</h1>
+				<p>GIS Lab 2026 web preview for NO2, PM2.5, and PM10 layers. <br />Each pollutant is organized into pollution, land cover, and population map views.</p>
 				<ul class="actions">
 					<li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
 				</ul>
@@ -33,8 +33,9 @@
 			<nav id="nav">
 				<ul class="links">
 					<li class="active"><a href="#overview">Overview</a></li>
-					<li><a href="#map-demo">Map Viewer</a></li>
-					<li><a href="#files">Files</a></li>
+					<li><a href="#no2">NO2</a></li>
+					<li><a href="#pm25">PM2.5</a></li>
+					<li><a href="#pm10">PM10</a></li>
 					<li><a href="#notes">GeoServer Notes</a></li>
 				</ul>
 			</nav>
@@ -44,112 +45,243 @@
 				<article id="overview" class="post featured lab-overview">
 					<header class="major">
 						<span class="date">GIS Laboratory 2026</span>
-						<h2>Interactive GIS Layer Demo</h2>
-						<p>This page is a draft structure for displaying TIF or GPKG data published through GeoServer. The map starts with a selectable basemap and reserves overlay choices for pollution, landcover, and population layers.</p>
+						<h2>Three-Level Web Map Structure</h2>
+						<p>The largest categories are NO2, PM2.5, and PM10. Each pollutant section contains three thematic map views: pollution, land cover, and population.</p>
 					</header>
 					<div class="summary-grid">
-						<a class="summary-tile" href="#map-demo">
-							<span class="summary-code">Base</span>
-							<strong>OSM or satellite</strong>
-							<small>Selectable background map.</small>
+						<a class="summary-tile" href="#no2">
+							<span class="summary-code">NO2</span>
+							<strong>Nitrogen dioxide</strong>
+							<small>Pollution, land cover, and population maps.</small>
 						</a>
-						<a class="summary-tile" href="#map-demo">
-							<span class="summary-code">Layer</span>
-							<strong>Pollution / landcover / population</strong>
-							<small>One GeoServer overlay at a time.</small>
+						<a class="summary-tile" href="#pm25">
+							<span class="summary-code">PM2.5</span>
+							<strong>Fine particulate matter</strong>
+							<small>Pollution, land cover, and population maps.</small>
 						</a>
-						<a class="summary-tile" href="#notes">
-							<span class="summary-code">WMS</span>
-							<strong>TIF or GPKG through GeoServer</strong>
-							<small>No local PNG dependency.</small>
+						<a class="summary-tile" href="#pm10">
+							<span class="summary-code">PM10</span>
+							<strong>Coarse particulate matter</strong>
+							<small>Pollution, land cover, and population maps.</small>
 						</a>
 					</div>
 				</article>
 
-				<section class="map-demo-section" id="map-demo">
+				<section class="pollutant-section" id="no2">
 					<header class="major section-heading">
-						<span class="date">Interactive Demo</span>
-						<h2>Basemap + GeoServer Layer</h2>
-						<p>Select either an OSM or satellite basemap, then choose one overlay layer published from TIF or GPKG data.</p>
+						<span class="date">Level 01</span>
+						<h2>NO2</h2>
+						<p>Three GeoServer map placeholders for the NO2 workflow. Choose OSM or satellite as the basemap for each map.</p>
 					</header>
-					<div class="viewer-shell">
-						<div class="viewer-toolbar" aria-label="Map controls">
-							<label for="basemap-select">
-								Basemap
-								<select id="basemap-select">
+					<div class="thematic-map-grid">
+						<article class="thematic-map-card">
+							<header>
+								<span class="date">Level 03</span>
+								<h3>Pollution</h3>
+							</header>
+							<div class="mini-toolbar">
+								<label for="no2-pollution-basemap">Basemap</label>
+								<select id="no2-pollution-basemap" class="basemap-select">
 									<option value="osm">OSM</option>
 									<option value="satellite">Satellite</option>
 								</select>
-							</label>
-							<label for="layer-select">
-								Layer
-								<select id="layer-select">
-									<option value="none">None</option>
-									<option value="pollution">Pollution</option>
-									<option value="landcover">Landcover</option>
-									<option value="population">Population</option>
+							</div>
+							<div class="category-map" id="no2-pollution-map" data-layer="your_workspace:no2_pollution" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:no2_pollution</p>
+						</article>
+						<article class="thematic-map-card">
+							<header>
+								<span class="date">Level 03</span>
+								<h3>Land Cover</h3>
+							</header>
+							<div class="mini-toolbar">
+								<label for="no2-landcover-basemap">Basemap</label>
+								<select id="no2-landcover-basemap" class="basemap-select">
+									<option value="osm">OSM</option>
+									<option value="satellite">Satellite</option>
 								</select>
-							</label>
-						</div>
-						<div
-							id="demo-map"
-							data-geoserver-url=""
-							data-layer-pollution="your_workspace:pollution"
-							data-layer-landcover="your_workspace:landcover"
-							data-layer-population="your_workspace:population"
-							data-layer-style-pollution=""
-							data-layer-style-landcover=""
-							data-layer-style-population=""
-							data-map-center-lat="45.46"
-							data-map-center-lng="9.19"
-							data-map-zoom="9">
-						</div>
-						<div class="viewer-status" id="viewer-status">No GeoServer overlay selected.</div>
+							</div>
+							<div class="category-map" id="no2-landcover-map" data-layer="your_workspace:no2_landcover" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:no2_landcover</p>
+						</article>
+						<article class="thematic-map-card">
+							<header>
+								<span class="date">Level 03</span>
+								<h3>Population</h3>
+							</header>
+							<div class="mini-toolbar">
+								<label for="no2-population-basemap">Basemap</label>
+								<select id="no2-population-basemap" class="basemap-select">
+									<option value="osm">OSM</option>
+									<option value="satellite">Satellite</option>
+								</select>
+							</div>
+							<div class="category-map" id="no2-population-map" data-layer="your_workspace:no2_population" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:no2_population</p>
+						</article>
 					</div>
 				</section>
 
-				<section class="file-section" id="files">
+				<section class="pollutant-section" id="pm25">
 					<header class="major section-heading">
-						<span class="date">Project Files</span>
-						<h2>PNG and Excel Outputs</h2>
-						<p>Supporting image and spreadsheet files are grouped by the same layer categories used in the map viewer.</p>
+						<span class="date">Level 01</span>
+						<h2>PM2.5</h2>
+						<p>Three GeoServer map placeholders for the PM2.5 workflow. Choose OSM or satellite as the basemap for each map.</p>
 					</header>
-					<div class="file-category-grid">
-						<article class="file-category-card">
+					<div class="thematic-map-grid">
+						<article class="thematic-map-card">
 							<header>
-								<span class="date">Layer 01</span>
+								<span class="date">Level 03</span>
 								<h3>Pollution</h3>
 							</header>
-							<p>No separate pollution PNG or Excel file was found in the selected folders. The pollution layer remains available as a GeoServer WMS option in the map viewer.</p>
+							<div class="mini-toolbar">
+								<label for="pm25-pollution-basemap">Basemap</label>
+								<select id="pm25-pollution-basemap" class="basemap-select">
+									<option value="osm">OSM</option>
+									<option value="satellite">Satellite</option>
+								</select>
+							</div>
+							<div class="category-map" id="pm25-pollution-map" data-layer="your_workspace:pm25_pollution" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:pm25_pollution</p>
 						</article>
-						<article class="file-category-card">
+						<article class="thematic-map-card">
 							<header>
-								<span class="date">Layer 02</span>
-								<h3>Landcover</h3>
+								<span class="date">Level 03</span>
+								<h3>Land Cover</h3>
 							</header>
-							<a class="asset-preview" href="assets/data/landcover/zonal-statistics-lcc.png">
-								<img src="assets/data/landcover/zonal-statistics-lcc.png" alt="Zonal Statistics by Land Cover Change" />
-							</a>
-							<ul class="file-list">
-								<li><a href="assets/data/landcover/zonal-statistics-lcc.png">zonal-statistics-lcc.png</a></li>
-								<li><a href="assets/data/landcover/bulgaria-2021-2023.xlsx">bulgaria-2021-2023.xlsx</a></li>
-								<li><a href="assets/data/landcover/zonal-statistics.xlsx">zonal-statistics.xlsx</a></li>
-								<li><a href="assets/data/landcover/zonal-statistics-bar-chart.xlsx">zonal-statistics-bar-chart.xlsx</a></li>
-								<li><a href="assets/data/landcover/zonal-statistics-by-lcc.xlsx">zonal-statistics-by-lcc.xlsx</a></li>
-							</ul>
+							<div class="mini-toolbar">
+								<label for="pm25-landcover-basemap">Basemap</label>
+								<select id="pm25-landcover-basemap" class="basemap-select">
+									<option value="osm">OSM</option>
+									<option value="satellite">Satellite</option>
+								</select>
+							</div>
+							<div class="category-map" id="pm25-landcover-map" data-layer="your_workspace:pm25_landcover" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:pm25_landcover</p>
 						</article>
-						<article class="file-category-card">
+						<article class="thematic-map-card">
 							<header>
-								<span class="date">Layer 03</span>
+								<span class="date">Level 03</span>
 								<h3>Population</h3>
 							</header>
-							<a class="asset-preview" href="assets/data/population/pm10-population-exposure.png">
+							<div class="mini-toolbar">
+								<label for="pm25-population-basemap">Basemap</label>
+								<select id="pm25-population-basemap" class="basemap-select">
+									<option value="osm">OSM</option>
+									<option value="satellite">Satellite</option>
+								</select>
+							</div>
+							<div class="category-map" id="pm25-population-map" data-layer="your_workspace:pm25_population" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:pm25_population</p>
+						</article>
+					</div>
+				</section>
+
+				<section class="pollutant-section" id="pm10">
+					<header class="major section-heading">
+						<span class="date">Level 01</span>
+						<h2>PM10</h2>
+						<p>Three GeoServer map placeholders for the PM10 workflow. Supporting chart and table outputs are shown under their corresponding thematic content.</p>
+					</header>
+					<div class="thematic-map-grid">
+						<article class="thematic-map-card">
+							<header>
+								<span class="date">Level 03</span>
+								<h3>Pollution</h3>
+							</header>
+							<div class="mini-toolbar">
+								<label for="pm10-pollution-basemap">Basemap</label>
+								<select id="pm10-pollution-basemap" class="basemap-select">
+									<option value="osm">OSM</option>
+									<option value="satellite">Satellite</option>
+								</select>
+							</div>
+							<div class="category-map" id="pm10-pollution-map" data-layer="your_workspace:pm10_pollution" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:pm10_pollution</p>
+						</article>
+						<article class="thematic-map-card">
+							<header>
+								<span class="date">Level 03</span>
+								<h3>Land Cover</h3>
+							</header>
+							<div class="mini-toolbar">
+								<label for="pm10-landcover-basemap">Basemap</label>
+								<select id="pm10-landcover-basemap" class="basemap-select">
+									<option value="osm">OSM</option>
+									<option value="satellite">Satellite</option>
+								</select>
+							</div>
+							<div class="category-map" id="pm10-landcover-map" data-layer="your_workspace:pm10_landcover" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:pm10_landcover</p>
+							<div class="supporting-output">
+								<h4>Land Cover Chart</h4>
+								<img src="assets/data/landcover/zonal-statistics-lcc.png" alt="Zonal Statistics by Land Cover Change" />
+							</div>
+							<div class="supporting-output">
+								<h4>Bulgaria 2021-2023 Data Table</h4>
+								<div class="table-wrapper">
+									<table class="compact-data-table">
+										<thead>
+											<tr>
+												<th>Indicator</th>
+												<th>Value</th>
+												<th>Category</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr><td>stability(persistence)</td><td>0.9493</td><td>N/A (Baseline)</td></tr>
+											<tr><td>Primary source of gain</td><td>0.6216</td><td>Rangeland (code11)</td></tr>
+											<tr><td>Secondary source of gain</td><td>0.3295</td><td>Crops (code5)</td></tr>
+											<tr><td>Third source of gain</td><td>0.0333</td><td>Built (code7)</td></tr>
+											<tr><td>Primary source of destination</td><td>0.8436</td><td>Rangeland (code11)</td></tr>
+											<tr><td>Secondary source of destination</td><td>0.1288</td><td>Crops (code5)</td></tr>
+											<tr><td>Third source of destination</td><td>0.0184</td><td>Built (code7)</td></tr>
+										</tbody>
+									</table>
+								</div>
+								<div class="table-wrapper">
+									<table class="compact-data-table">
+										<thead>
+											<tr>
+												<th>Value</th>
+												<th>Pixel count</th>
+												<th>Area (deg2)</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr><td>102</td><td>288,236</td><td>0.002877</td></tr>
+											<tr><td>201</td><td>173,703</td><td>0.001734</td></tr>
+											<tr><td>202</td><td>500,526,878</td><td>4.996822</td></tr>
+											<tr><td>204</td><td>50,773</td><td>0.000507</td></tr>
+											<tr><td>205</td><td>3,442,142</td><td>0.034363</td></tr>
+											<tr><td>207</td><td>491,578</td><td>0.004907</td></tr>
+											<tr><td>209</td><td>22,620</td><td>0.000226</td></tr>
+											<tr><td>211</td><td>22,545,230</td><td>0.225072</td></tr>
+											<tr><td>502</td><td>6,558,426</td><td>0.065474</td></tr>
+											<tr><td>1102</td><td>12,370,715</td><td>0.123498</td></tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</article>
+						<article class="thematic-map-card">
+							<header>
+								<span class="date">Level 03</span>
+								<h3>Population</h3>
+							</header>
+							<div class="mini-toolbar">
+								<label for="pm10-population-basemap">Basemap</label>
+								<select id="pm10-population-basemap" class="basemap-select">
+									<option value="osm">OSM</option>
+									<option value="satellite">Satellite</option>
+								</select>
+							</div>
+							<div class="category-map" id="pm10-population-map" data-layer="your_workspace:pm10_population" data-geoserver-url="" data-map-center-lat="45.46" data-map-center-lng="9.19" data-map-zoom="8"></div>
+							<p class="map-status">GeoServer WMS layer placeholder: your_workspace:pm10_population</p>
+							<div class="supporting-output">
+								<h4>PM10 Population Exposure Chart</h4>
 								<img src="assets/data/population/pm10-population-exposure.png" alt="PM10 Population Exposure in Bulgaria 2023" />
-							</a>
-							<ul class="file-list">
-								<li><a href="assets/data/population/pm10-population-exposure.png">pm10-population-exposure.png</a></li>
-								<li><a href="assets/data/population/pie-chart.xlsx">pie-chart.xlsx</a></li>
-							</ul>
+							</div>
 						</article>
 					</div>
 				</section>
@@ -158,30 +290,30 @@
 					<header>
 						<h2>GeoServer Connection Notes</h2>
 					</header>
-					<p>The map viewer is prepared for layers published from TIF or GPKG data through GeoServer WMS. Fill in <code>data-geoserver-url</code> and the three <code>data-layer-*</code> values in the map container when the final layers are ready.</p>
+					<p>Each map card is prepared for a GeoServer WMS overlay. Fill in the map container's <code>data-geoserver-url</code> and replace the placeholder <code>data-layer</code> value when the final layers are ready.</p>
 					<table>
 						<thead>
 							<tr>
-								<th>Layer option</th>
-								<th>Reserved GeoServer layer name</th>
-								<th>Status</th>
+								<th>Level 01</th>
+								<th>Level 03 map views</th>
+								<th>Display method</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>Pollution</td>
-								<td>your_workspace:pollution</td>
-								<td>Waiting for GeoServer WMS</td>
+								<td>NO2</td>
+								<td>Pollution / Land Cover / Population</td>
+								<td>GeoServer WMS placeholders</td>
 							</tr>
 							<tr>
-								<td>Landcover</td>
-								<td>your_workspace:landcover</td>
-								<td>Waiting for GeoServer WMS</td>
+								<td>PM2.5</td>
+								<td>Pollution / Land Cover / Population</td>
+								<td>GeoServer WMS placeholders</td>
 							</tr>
 							<tr>
-								<td>Population</td>
-								<td>your_workspace:population</td>
-								<td>Waiting for GeoServer WMS</td>
+								<td>PM10</td>
+								<td>Pollution / Land Cover / Population</td>
+								<td>GeoServer WMS placeholders with chart and table outputs</td>
 							</tr>
 						</tbody>
 					</table>
@@ -192,16 +324,16 @@
 			<footer id="footer">
 				<section>
 					<h2>Project Information</h2>
-					<p>GIS Lab 2026 interactive layer viewer draft. Final maps, legends, and analysis text can be added after the GeoServer layers are published.</p>
+					<p>GIS Lab 2026 pollutant layer viewer draft. Final GeoServer layers, legends, and analysis text can be added after the WMS layers are published.</p>
 				</section>
 				<section class="split contact">
 					<section>
-						<h3>Categories</h3>
-						<p>Pollution / Landcover / Population</p>
+						<h3>Level 01</h3>
+						<p>NO2 / PM2.5 / PM10</p>
 					</section>
 					<section>
-						<h3>Map Source</h3>
-						<p>TIF or GPKG layers through GeoServer WMS</p>
+						<h3>Level 03</h3>
+						<p>Pollution / Land Cover / Population</p>
 					</section>
 				</section>
 			</footer>
@@ -224,4 +356,3 @@
 
 	</body>
 </html>
-

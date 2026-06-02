@@ -1,42 +1,36 @@
-# GIS Lab 2026 GIS Layer Viewer
+# GIS Lab 2026 Pollutant Layer Viewer
 
 This repository contains a static web page for the GIS Lab 2026 map project.
 
-The current draft includes an interactive map viewer with:
+The page is organized into three first-level pollutant categories:
 
-- A selectable basemap: OSM or satellite imagery.
-- A selectable GeoServer overlay layer: pollution, landcover, or population.
-- Placeholder settings for TIF or GPKG data published through GeoServer WMS.
+- NO2
+- PM2.5
+- PM10
 
-The page does not depend on local PNG files. The final map layers should be published through GeoServer and loaded as WMS layers.
+Each pollutant category contains three thematic map views:
+
+- Pollution
+- Land Cover
+- Population
+
+The maps use Leaflet with selectable OSM or satellite basemaps. GeoServer WMS layer placeholders are prepared in the HTML through `data-geoserver-url` and `data-layer` attributes.
+
+## Displayed Outputs
+
+The page displays selected chart and table outputs directly in the page. It does not include download links for the supporting files.
+
+- `assets/data/landcover/zonal-statistics-lcc.png`: Land cover chart.
+- `assets/data/landcover/bulgaria-2021-2023.xlsx`: Source workbook used to create the displayed land cover tables.
+- `assets/data/population/pm10-population-exposure.png`: PM10 population exposure chart.
 
 ## Project Structure
 
 - `index.html`: Main web page.
-- `assets/css/custom.css`: Custom styling for the project layout and GeoServer placeholders.
-- `assets/js/map-demo.js`: Leaflet map setup for basemap and GeoServer layer switching.
-- `assets/data/population/`: Population PNG and Excel outputs.
-- `assets/data/landcover/`: Landcover PNG and Excel outputs.
-- `assets/`: HTML5 UP template styles, scripts, and web fonts.
-- `images/`: Template background and image assets.
+- `assets/css/custom.css`: Custom layout and map/card/table styling.
+- `assets/js/map-demo.js`: Leaflet setup for the map cards.
+- `assets/data/`: Supporting image and spreadsheet files used for page display.
 - `LICENSE.txt`: Original HTML5 UP template license.
-
-## GeoServer Placeholder Fields
-
-The map viewer is configured in `index.html` with attributes such as:
-
-```html
-data-geoserver-url=""
-data-layer-pollution="your_workspace:pollution"
-data-layer-landcover="your_workspace:landcover"
-data-layer-population="your_workspace:population"
-```
-
-When the GeoServer layers are ready, replace the empty WMS URL and placeholder layer names.
-
-## Preview
-
-Open `index.html` in a browser, or serve the folder with any local static file server.
 
 ## Credits
 
