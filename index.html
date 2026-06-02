@@ -71,6 +71,11 @@
 						<h2>PM2.5</h2>
 						<p>Fine particulate matter map outputs. Replace the empty GeoServer fields when the WMS layers or exported images are ready.</p>
 					</header>
+					<!--
+						代码备注：下面两个灰色框是 PM2.5 的 GeoServer 地图占位。
+						不要在这里放本地 PNG 路径，例如 C:\... 或 file://...
+						等 GeoServer 图层发布后，把公网 WMS 地址填到 data-geoserver-url，把图层名填到 data-layer。
+					-->
 					<div class="map-grid">
 						<article class="map-card">
 							<div class="geoserver-slot" data-pollutant="pm25" data-geoserver-url="" data-layer="pm25_concentration" data-style="" data-format="image/png">
@@ -99,6 +104,11 @@
 						<h2>PM10</h2>
 						<p>Coarse particulate matter map outputs. GeoServer image locations are intentionally blank in this draft.</p>
 					</header>
+					<!--
+						代码备注：下面两个灰色框是 PM10 的 GeoServer 地图占位。
+						不要在这里放本地 PNG 路径，例如 C:\... 或 file://...
+						等 GeoServer 图层发布后，把公网 WMS 地址填到 data-geoserver-url，把图层名填到 data-layer。
+					-->
 					<div class="map-grid">
 						<article class="map-card">
 							<div class="geoserver-slot" data-pollutant="pm10" data-geoserver-url="" data-layer="pm10_concentration" data-style="" data-format="image/png">
@@ -127,6 +137,11 @@
 						<h2>NO2</h2>
 						<p>Nitrogen dioxide map outputs. The map containers below are prepared for future GeoServer connections.</p>
 					</header>
+					<!--
+						代码备注：下面两个灰色框是 NO2 的 GeoServer 地图占位。
+						不要在这里放本地 PNG 路径，例如 C:\... 或 file://...
+						等 GeoServer 图层发布后，把公网 WMS 地址填到 data-geoserver-url，把图层名填到 data-layer。
+					-->
 					<div class="map-grid">
 						<article class="map-card">
 							<div class="geoserver-slot" data-pollutant="no2" data-geoserver-url="" data-layer="no2_concentration" data-style="" data-format="image/png">
@@ -153,6 +168,10 @@
 					<header>
 						<h2>GeoServer Connection Notes</h2>
 					</header>
+					<!--
+						代码备注：这个说明区会显示在网页上，用来提醒读者本项目的地图来源应该是 GeoServer，
+						而不是本地 PNG 图片文件。
+					-->
 					<p>The placeholder blocks already include empty attributes for future GeoServer integration. When the final WMS or image URLs are available, fill in <code>data-geoserver-url</code>, <code>data-layer</code>, <code>data-style</code>, and image source values.</p>
 					<p class="geoserver-note"><strong>Note:</strong> This project should not use local PNG files or local file paths such as <code>file://</code> or <code>C:\...</code>. Final map images should be loaded from GeoServer WMS or another public web URL so the page works after it is published on GitHub Pages.</p>
 					<table>
