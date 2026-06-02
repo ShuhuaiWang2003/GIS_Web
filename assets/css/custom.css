@@ -154,14 +154,6 @@
 	letter-spacing: 0;
 }
 
-.geoserver-note {
-	background: #f4f7f9;
-	border-left: solid 4px #18bfef;
-	border-radius: 4px;
-	color: #4a5560;
-	padding: 1rem 1.25rem;
-}
-
 @media screen and (max-width: 980px) {
 	.summary-grid,
 	.map-grid {
