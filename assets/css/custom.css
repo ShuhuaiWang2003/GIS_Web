@@ -111,8 +111,13 @@ html {
 	width: 100%;
 	height: 36rem;
 	background: #eef3f6;
+	cursor: grab;
 	overflow: hidden;
 	position: relative;
+}
+
+.pollutant-map.is-panning {
+	cursor: grabbing;
 }
 
 .pollutant-map:fullscreen {
@@ -256,6 +261,53 @@ button.map-control-button:focus {
 	border-radius: 4px;
 	display: block;
 	max-width: 100%;
+}
+
+.map-loading {
+	background: rgba(255, 255, 255, 0.96);
+	border: solid 1px #d9dee3;
+	border-radius: 4px;
+	box-shadow: 0 0.4rem 1rem rgba(33, 41, 49, 0.16);
+	color: #212931;
+	left: 50%;
+	min-width: 11rem;
+	padding: 0.65rem 0.8rem;
+	pointer-events: none;
+	position: absolute;
+	text-align: center;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 7;
+}
+
+.map-loading[hidden] {
+	display: none;
+}
+
+.map-loading span {
+	display: block;
+	font-size: 0.76rem;
+	font-weight: 900;
+	letter-spacing: 0.04em;
+	line-height: 1;
+	margin-bottom: 0.45rem;
+	text-transform: uppercase;
+}
+
+.map-loading i {
+	background: #e4e9ed;
+	border-radius: 999px;
+	display: block;
+	height: 0.45rem;
+	overflow: hidden;
+	width: 100%;
+}
+
+.map-loading b {
+	background: #18bfef;
+	display: block;
+	height: 100%;
+	transition: width 0.16s ease;
 }
 
 .output-viewer {
@@ -416,6 +468,46 @@ button.map-control-button:focus {
 	max-height: 18rem;
 }
 
+.result-image-viewer {
+	position: relative;
+}
+
+.result-image-viewer .output-image {
+	cursor: zoom-in;
+}
+
+.result-image-actions {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 0.55rem;
+}
+
+button.image-viewer-button {
+	background: #ffffff;
+	border: solid 1px #d9dee3;
+	border-radius: 4px;
+	box-shadow: none;
+	color: #212931;
+	cursor: pointer;
+	font-size: 0.72rem;
+	font-weight: 900;
+	height: 2.2rem;
+	letter-spacing: 0.04em;
+	line-height: 2.2rem;
+	min-width: 0;
+	padding: 0 0.75rem;
+	text-align: center;
+	text-transform: uppercase;
+	white-space: nowrap;
+	width: auto;
+}
+
+button.image-viewer-button:hover,
+button.image-viewer-button:focus {
+	border-color: #18bfef;
+	color: #18bfef;
+}
+
 .result-output-block .output-placeholder {
 	min-height: 11rem;
 }
@@ -442,6 +534,63 @@ button.map-control-button:focus {
 
 .result-text-placeholder p {
 	margin-bottom: 0;
+}
+
+body.image-lightbox-open {
+	overflow: hidden;
+}
+
+.image-lightbox {
+	background: rgba(12, 18, 24, 0.94);
+	display: flex;
+	flex-direction: column;
+	inset: 0;
+	padding: 1rem;
+	position: fixed;
+	z-index: 10000;
+}
+
+.image-lightbox[hidden] {
+	display: none;
+}
+
+.image-lightbox-toolbar {
+	align-items: center;
+	background: #ffffff;
+	border-radius: 6px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	justify-content: flex-end;
+	padding: 0.65rem;
+}
+
+.image-scale-label {
+	color: #212931;
+	font-size: 0.82rem;
+	font-weight: 900;
+	min-width: 3.5rem;
+	text-align: center;
+}
+
+.image-lightbox-stage {
+	align-items: flex-start;
+	display: flex;
+	flex: 1;
+	justify-content: flex-start;
+	overflow: auto;
+	padding: 1rem 0 0 0;
+}
+
+.image-lightbox-image {
+	background: #ffffff;
+	border-radius: 4px;
+	display: block;
+	height: auto;
+	margin: auto;
+	max-width: none;
+	padding: 0.75rem;
+	width: 90vw;
 }
 
 .workflow-table th {

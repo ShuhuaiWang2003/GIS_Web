@@ -6,14 +6,26 @@
 	var BULGARIA_CENTER_LNG = 25.2383;
 	var BULGARIA_DEFAULT_ZOOM = 7;
 	var SCALE_LINE_MAX_WIDTH = 120;
+	var MIN_ZOOM = 5;
+	var MAX_ZOOM = 12;
+	var MAX_WEB_MERCATOR_LAT = 85.05112878;
 
 	function getNumber(value, fallback) {
 		var parsed = parseFloat(value);
 		return Number.isFinite(parsed) ? parsed : fallback;
 	}
 
+	function clamp(value, min, max) {
+		return Math.min(Math.max(value, min), max);
+	}
+
+	function normalizeLng(lng) {
+		return ((lng + 180) % 360 + 360) % 360 - 180;
+	}
+
 	function lonLatToWorld(lng, lat, zoom) {
-		var sinLat = Math.sin(lat * Math.PI / 180);
+		var safeLat = clamp(lat, -MAX_WEB_MERCATOR_LAT, MAX_WEB_MERCATOR_LAT);
+		var sinLat = Math.sin(safeLat * Math.PI / 180);
 		var scale = TILE_SIZE * Math.pow(2, zoom);
 
 		return {
@@ -35,9 +47,9 @@
 		var rect = mapNode.getBoundingClientRect();
 		var width = Math.max(rect.width, 320);
 		var height = Math.max(rect.height, 280);
-		var zoom = getNumber(mapNode.dataset.mapZoom, BULGARIA_DEFAULT_ZOOM);
-		var centerLat = getNumber(mapNode.dataset.mapCenterLat, BULGARIA_CENTER_LAT);
-		var centerLng = getNumber(mapNode.dataset.mapCenterLng, BULGARIA_CENTER_LNG);
+		var zoom = clamp(Math.round(getNumber(mapNode.dataset.mapZoom, BULGARIA_DEFAULT_ZOOM)), MIN_ZOOM, MAX_ZOOM);
+		var centerLat = clamp(getNumber(mapNode.dataset.mapCenterLat, BULGARIA_CENTER_LAT), -MAX_WEB_MERCATOR_LAT, MAX_WEB_MERCATOR_LAT);
+		var centerLng = normalizeLng(getNumber(mapNode.dataset.mapCenterLng, BULGARIA_CENTER_LNG));
 		var center = lonLatToWorld(centerLng, centerLat, zoom);
 		var topLeft = {
 			x: center.x - width / 2,
@@ -147,6 +159,78 @@
 		return legendNode;
 	}
 
+	function updateLoadingProgress(mapNode, percent) {
+		var loadingNode = mapNode.querySelector(".map-loading");
+		var labelNode = loadingNode ? loadingNode.querySelector("[data-loading-label]") : null;
+		var barNode = loadingNode ? loadingNode.querySelector("[data-loading-bar]") : null;
+
+		if (!loadingNode) {
+			return;
+		}
+
+		loadingNode.hidden = false;
+
+		if (labelNode) {
+			labelNode.textContent = "Loading " + percent + "%";
+		}
+
+		if (barNode) {
+			barNode.style.width = percent + "%";
+		}
+	}
+
+	function trackMapImageLoading(mapNode, statusNode, layerName) {
+		var loadingNode = mapNode.querySelector(".map-loading");
+		var images = Array.prototype.slice.call(mapNode.querySelectorAll("img")).filter(function (image) {
+			return image.getAttribute("src");
+		});
+		var token = String(Date.now()) + String(Math.random());
+		var loaded = 0;
+
+		if (!loadingNode || !images.length) {
+			return;
+		}
+
+		mapNode.dataset.loadingToken = token;
+		updateLoadingProgress(mapNode, 0);
+
+		function markComplete() {
+			var percent;
+
+			if (mapNode.dataset.loadingToken !== token) {
+				return;
+			}
+
+			loaded += 1;
+			percent = Math.round(loaded / images.length * 100);
+			updateLoadingProgress(mapNode, percent);
+
+			if (statusNode && layerName) {
+				statusNode.textContent = percent < 100
+					? "Loading GeoServer WMS layer: " + layerName + " (" + percent + "%)"
+					: "Displaying GeoServer WMS layer: " + layerName;
+			}
+
+			if (loaded >= images.length) {
+				window.setTimeout(function () {
+					if (mapNode.dataset.loadingToken === token) {
+						loadingNode.hidden = true;
+					}
+				}, 350);
+			}
+		}
+
+		images.forEach(function (image) {
+			if (image.complete) {
+				markComplete();
+				return;
+			}
+
+			image.addEventListener("load", markComplete, { once: true });
+			image.addEventListener("error", markComplete, { once: true });
+		});
+	}
+
 	function renderSimpleMap(shell) {
 		var mapNode = shell.querySelector(".pollutant-map");
 		var basemapSelect = shell.querySelector(".basemap-select");
@@ -168,7 +252,8 @@
 		var layerName = selectedOption ? selectedOption.dataset.layer || "" : "";
 		var geoserverUrl = selectedOption ? selectedOption.dataset.geoserverUrl || "" : "";
 		var styleName = selectedOption ? selectedOption.dataset.style || "" : "";
-		var shouldShowLegend = selectedOption && selectedOption.dataset.hasLegend === "true" && geoserverUrl && layerName;
+		var isPanning = mapNode._panState && mapNode._panState.active;
+		var shouldShowLegend = selectedOption && !isPanning && selectedOption.dataset.hasLegend === "true" && geoserverUrl && layerName;
 		var boundsNorthWest = worldToLonLat(geometry.topLeft.x, geometry.topLeft.y, geometry.zoom);
 		var boundsSouthEast = worldToLonLat(geometry.bottomRight.x, geometry.bottomRight.y, geometry.zoom);
 		var html = "";
@@ -184,7 +269,7 @@
 			}
 		}
 
-		if (selectedOption && selectedOption.value !== "none" && geoserverUrl && layerName) {
+		if (selectedOption && selectedOption.value !== "none" && geoserverUrl && layerName && !isPanning) {
 			html += '<img class="simple-map-overlay" alt="' + label + '" src="' + buildWmsUrl(geoserverUrl, layerName, {
 				west: boundsNorthWest.lng,
 				north: boundsNorthWest.lat,
@@ -193,7 +278,11 @@
 			}, geometry.width, geometry.height) + '" />';
 
 			if (statusNode) {
-				statusNode.textContent = "Displaying GeoServer WMS layer: " + layerName;
+				statusNode.textContent = "Loading GeoServer WMS layer: " + layerName + " (0%)";
+			}
+		} else if (selectedOption && selectedOption.value !== "none" && geoserverUrl && layerName && isPanning) {
+			if (statusNode) {
+				statusNode.textContent = "Release the map to reload GeoServer WMS layer: " + layerName;
 			}
 		} else if (selectedOption && selectedOption.value !== "none") {
 			if (statusNode) {
@@ -210,6 +299,7 @@
 		html += '<div class="map-mouse-position" aria-live="polite">Lat -, Lon -</div>';
 		html += '<div class="map-scale-line"><span style="width:' + scaleLine.width + 'px"></span><strong>' + scaleLine.label + '</strong></div>';
 		html += '<div class="map-attribution">' + (basemapSelect.value === "satellite" ? "Tiles &copy; Esri" : "&copy; OpenStreetMap contributors") + '</div>';
+		html += '<div class="map-loading" hidden><span data-loading-label>Loading 0%</span><i><b data-loading-bar style="width:0%"></b></i></div>';
 		mapNode.innerHTML = html;
 
 		var legendNode = getLegendNode(mapNode);
@@ -226,6 +316,8 @@
 
 			legendNode.hidden = true;
 		}
+
+		trackMapImageLoading(mapNode, statusNode, isPanning ? "" : layerName);
 	}
 
 	function updateMousePosition(shell, event) {
@@ -253,6 +345,132 @@
 		if (positionNode) {
 			positionNode.textContent = "Lat -, Lon -";
 		}
+	}
+
+	function scheduleMapRender(shell) {
+		var mapNode = shell.querySelector(".pollutant-map");
+
+		if (!mapNode || mapNode._renderFrame) {
+			return;
+		}
+
+		mapNode._renderFrame = window.requestAnimationFrame(function () {
+			mapNode._renderFrame = null;
+			renderSimpleMap(shell);
+		});
+	}
+
+	function updateMapCenterFromWorld(mapNode, worldPoint, zoom) {
+		var scale = TILE_SIZE * Math.pow(2, zoom);
+		var safeWorldY = clamp(worldPoint.y, 0, scale);
+		var center = worldToLonLat(worldPoint.x, safeWorldY, zoom);
+
+		mapNode.dataset.mapCenterLat = String(clamp(center.lat, -MAX_WEB_MERCATOR_LAT, MAX_WEB_MERCATOR_LAT));
+		mapNode.dataset.mapCenterLng = String(normalizeLng(center.lng));
+		mapNode.dataset.mapZoom = String(zoom);
+	}
+
+	function isMapControlTarget(target) {
+		return target && target.closest && target.closest(".map-control-stack, .map-legend, .map-loading");
+	}
+
+	function startMapPan(shell, event) {
+		var mapNode = shell.querySelector(".pollutant-map");
+		var geometry;
+
+		if (!mapNode || event.button !== 0 || isMapControlTarget(event.target)) {
+			return;
+		}
+
+		geometry = getMapGeometry(mapNode);
+		mapNode._panState = {
+			active: true,
+			startX: event.clientX,
+			startY: event.clientY,
+			startCenterWorld: lonLatToWorld(geometry.centerLng, geometry.centerLat, geometry.zoom),
+			zoom: geometry.zoom
+		};
+		mapNode.classList.add("is-panning");
+		event.preventDefault();
+	}
+
+	function continueMapPan(shell, event) {
+		var mapNode = shell.querySelector(".pollutant-map");
+		var state = mapNode ? mapNode._panState : null;
+		var deltaX;
+		var deltaY;
+
+		if (!mapNode || !state || !state.active) {
+			return;
+		}
+
+		deltaX = event.clientX - state.startX;
+		deltaY = event.clientY - state.startY;
+		updateMapCenterFromWorld(mapNode, {
+			x: state.startCenterWorld.x - deltaX,
+			y: state.startCenterWorld.y - deltaY
+		}, state.zoom);
+		scheduleMapRender(shell);
+		event.preventDefault();
+	}
+
+	function finishMapPan(shell) {
+		var mapNode = shell.querySelector(".pollutant-map");
+		var wasActive = mapNode && mapNode._panState && mapNode._panState.active;
+
+		if (!mapNode || !mapNode._panState) {
+			return;
+		}
+
+		mapNode._panState.active = false;
+		mapNode.classList.remove("is-panning");
+
+		if (wasActive) {
+			if (mapNode._renderFrame) {
+				window.cancelAnimationFrame(mapNode._renderFrame);
+				mapNode._renderFrame = null;
+			}
+
+			renderSimpleMap(shell);
+		}
+	}
+
+	function zoomMapWithWheel(shell, event) {
+		var mapNode = shell.querySelector(".pollutant-map");
+		var geometry;
+		var rect;
+		var cursorX;
+		var cursorY;
+		var nextZoom;
+		var cursorLngLat;
+		var cursorWorld;
+
+		if (!mapNode || !event.ctrlKey) {
+			return;
+		}
+
+		event.preventDefault();
+		geometry = getMapGeometry(mapNode);
+		rect = mapNode.getBoundingClientRect();
+		cursorX = clamp(event.clientX - rect.left, 0, geometry.width);
+		cursorY = clamp(event.clientY - rect.top, 0, geometry.height);
+		nextZoom = clamp(geometry.zoom + (event.deltaY < 0 ? 1 : -1), MIN_ZOOM, MAX_ZOOM);
+
+		if (nextZoom === geometry.zoom) {
+			return;
+		}
+
+		cursorLngLat = worldToLonLat(
+			geometry.topLeft.x + cursorX,
+			geometry.topLeft.y + cursorY,
+			geometry.zoom
+		);
+		cursorWorld = lonLatToWorld(cursorLngLat.lng, cursorLngLat.lat, nextZoom);
+		updateMapCenterFromWorld(mapNode, {
+			x: cursorWorld.x - cursorX + geometry.width / 2,
+			y: cursorWorld.y - cursorY + geometry.height / 2
+		}, nextZoom);
+		renderSimpleMap(shell);
 	}
 
 	function resetMapView(shell) {
@@ -292,11 +510,29 @@
 			mapNode.dataset.mapCenterLng = mapNode.dataset.mapCenterLng || mapNode.dataset.mapHomeCenterLng;
 			mapNode.dataset.mapZoom = mapNode.dataset.mapZoom || mapNode.dataset.mapHomeZoom;
 
+			mapNode.addEventListener("mousedown", function (event) {
+				startMapPan(shell, event);
+			});
 			mapNode.addEventListener("mousemove", function (event) {
+				if (mapNode._panState && mapNode._panState.active) {
+					return;
+				}
+
 				updateMousePosition(shell, event);
 			});
 			mapNode.addEventListener("mouseleave", function () {
-				clearMousePosition(shell);
+				if (!mapNode._panState || !mapNode._panState.active) {
+					clearMousePosition(shell);
+				}
+			});
+			mapNode.addEventListener("wheel", function (event) {
+				zoomMapWithWheel(shell, event);
+			}, { passive: false });
+			document.addEventListener("mousemove", function (event) {
+				continueMapPan(shell, event);
+			});
+			document.addEventListener("mouseup", function () {
+				finishMapPan(shell);
 			});
 			mapNode.addEventListener("click", function (event) {
 				var target = event.target;

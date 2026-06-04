@@ -10,7 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/custom.css?v=20260604-results" />
+		<link rel="stylesheet" href="assets/css/custom.css?v=20260604-interaction" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -132,7 +132,12 @@
 								</article>
 								<article class="result-output-block">
 									<h4>Land Cover</h4>
-									<img class="output-image" src="assets/data/landcover/zonal-statistics-lcc.png" alt="Zonal Statistics by Land Cover Change" />
+									<div class="result-image-viewer">
+										<img class="output-image" src="assets/data/landcover/zonal-statistics-lcc.png" alt="Zonal Statistics by Land Cover Change" />
+										<div class="result-image-actions">
+											<button type="button" class="image-viewer-button" data-result-image>View larger</button>
+										</div>
+									</div>
 									<div class="table-wrapper output-table-frame">
 										<table class="compact-data-table">
 											<thead>
@@ -159,7 +164,12 @@
 								</article>
 								<article class="result-output-block">
 									<h4>Population</h4>
-									<img class="output-image" src="assets/data/population/pm10-population-exposure.png" alt="PM10 Population Exposure in Bulgaria 2023" />
+									<div class="result-image-viewer">
+										<img class="output-image" src="assets/data/population/pm10-population-exposure.png" alt="PM10 Population Exposure in Bulgaria 2023" />
+										<div class="result-image-actions">
+											<button type="button" class="image-viewer-button" data-result-image>View larger</button>
+										</div>
+									</div>
 									<div class="result-text-placeholder">
 										<p>Text reserved for PM10 population exposure interpretation.</p>
 									</div>
@@ -200,6 +210,7 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		<script src="assets/js/results-viewer.js?v=20260604-interaction"></script>
 
 	</body>
 </html>
