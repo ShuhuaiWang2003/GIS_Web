@@ -363,6 +363,29 @@ button.map-control-button:focus {
 	letter-spacing: 0;
 }
 
+.home-blank {
+	min-height: 24rem;
+}
+
+.content-page section + section {
+	margin-top: 2.25rem;
+}
+
+.content-page h3 {
+	letter-spacing: 0.03em;
+	margin-bottom: 1rem;
+}
+
+.workflow-table th {
+	background: #f4f7f9;
+	font-weight: 900;
+}
+
+.workflow-table th,
+.workflow-table td {
+	vertical-align: top;
+}
+
 @media screen and (max-width: 980px) {
 	.summary-grid {
 		grid-template-columns: 1fr;

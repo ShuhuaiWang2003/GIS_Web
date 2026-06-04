@@ -6,11 +6,11 @@
 -->
 <html>
 	<head>
-		<title>GIS Lab 2026 - Pollutant Layer Viewer</title>
+		<title>GIS Lab 2026 - Home</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/custom.css?v=20260603-controls" />
+		<link rel="stylesheet" href="assets/css/custom.css?v=20260604-pages" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -18,11 +18,7 @@
 		<div id="wrapper" class="fade-in">
 
 			<div id="intro">
-				<h1>Pollutant<br />Layer Viewer</h1>
-				<p>GIS Lab 2026 web preview for NO2, PM2.5, and PM10 layers. <br />Each pollutant has one full-width basemap with selectable GeoServer overlays.</p>
-				<ul class="actions">
-					<li><a href="#main" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
-				</ul>
+				<h1>GIS Lab 2026</h1>
 			</div>
 
 			<header id="header">
@@ -31,231 +27,22 @@
 
 			<nav id="nav">
 				<ul class="links">
-					<li class="active"><a href="#overview">Overview</a></li>
-					<li><a href="#no2">NO2</a></li>
-					<li><a href="#pm25">PM2.5</a></li>
-					<li><a href="#pm10">PM10</a></li>
-					<li><a href="#notes">GeoServer Notes</a></li>
+					<li class="active"><a href="index.html">Home</a></li>
+					<li><a href="workflow.html">Workflow</a></li>
+					<li><a href="results.html">Results</a></li>
+					<li><a href="webgis.html">WebGIS</a></li>
 				</ul>
 			</nav>
 
 			<div id="main">
-
-				<article id="overview" class="post featured lab-overview">
-					<header class="major">
-						<span class="date">GIS Laboratory 2026</span>
-						<h2>Three Independent Pollutant Maps</h2>
-						<p>The largest categories are NO2, PM2.5, and PM10. Each category has one full-width map: choose the basemap first, then choose which thematic layer appears above it.</p>
-					</header>
-					<div class="summary-grid">
-						<a class="summary-tile" href="#no2">
-							<span class="summary-code">NO2</span>
-							<strong>Nitrogen dioxide</strong>
-							<small>One basemap, selectable overlay layer.</small>
-						</a>
-						<a class="summary-tile" href="#pm25">
-							<span class="summary-code">PM2.5</span>
-							<strong>Fine particulate matter</strong>
-							<small>One basemap, selectable overlay layer.</small>
-						</a>
-						<a class="summary-tile" href="#pm10">
-							<span class="summary-code">PM10</span>
-							<strong>Coarse particulate matter</strong>
-							<small>One basemap, selectable overlay layer.</small>
-						</a>
-					</div>
+				<article class="post featured home-blank">
 				</article>
-
-				<section class="pollutant-section" id="no2">
-					<header class="major section-heading">
-						<span class="date">Pollutant 01</span>
-						<h2>NO2</h2>
-						<p>Select an OSM or satellite basemap, then choose a NO2 thematic layer to show on the same map.</p>
-					</header>
-					<div class="pollutant-map-shell">
-						<div class="map-toolbar">
-							<label for="no2-basemap">
-								Basemap
-								<select id="no2-basemap" class="basemap-select">
-									<option value="osm">OSM</option>
-									<option value="satellite">Satellite</option>
-								</select>
-							</label>
-							<label for="no2-layer">
-								Layer
-								<select id="no2-layer" class="layer-select">
-									<option value="none">None</option>
-									<option value="pollution" data-label="NO2 Pollution" data-layer="your_workspace:no2_pollution" data-geoserver-url="">Pollution</option>
-									<option value="landcover" data-label="NO2 Land Cover" data-layer="your_workspace:no2_landcover" data-geoserver-url="">Land Cover</option>
-									<option value="population" data-label="NO2 Population" data-layer="your_workspace:no2_population" data-geoserver-url="">Population</option>
-								</select>
-							</label>
-						</div>
-						<div class="pollutant-map" id="no2-map" data-map-center-lat="42.7661" data-map-center-lng="25.2383" data-map-zoom="7"></div>
-						<p class="map-status">No overlay selected.</p>
-					</div>
-				</section>
-
-				<section class="pollutant-section" id="pm25">
-					<header class="major section-heading">
-						<span class="date">Pollutant 02</span>
-						<h2>PM2.5</h2>
-						<p>Select an OSM or satellite basemap, then choose a PM2.5 thematic layer to show on the same map.</p>
-					</header>
-					<div class="pollutant-map-shell">
-						<div class="map-toolbar">
-							<label for="pm25-basemap">
-								Basemap
-								<select id="pm25-basemap" class="basemap-select">
-									<option value="osm">OSM</option>
-									<option value="satellite">Satellite</option>
-								</select>
-							</label>
-							<label for="pm25-layer">
-								Layer
-								<select id="pm25-layer" class="layer-select">
-									<option value="none">None</option>
-									<option value="pollution" data-label="PM2.5 Pollution" data-layer="your_workspace:pm25_pollution" data-geoserver-url="">Pollution</option>
-									<option value="landcover" data-label="PM2.5 Land Cover" data-layer="your_workspace:pm25_landcover" data-geoserver-url="">Land Cover</option>
-									<option value="population" data-label="PM2.5 Population" data-layer="your_workspace:pm25_population" data-geoserver-url="">Population</option>
-								</select>
-							</label>
-						</div>
-						<div class="pollutant-map" id="pm25-map" data-map-center-lat="42.7661" data-map-center-lng="25.2383" data-map-zoom="7"></div>
-						<p class="map-status">No overlay selected.</p>
-					</div>
-				</section>
-
-				<section class="pollutant-section" id="pm10">
-					<header class="major section-heading">
-						<span class="date">Pollutant 03</span>
-						<h2>PM10</h2>
-						<p>Select an OSM or satellite basemap, then choose a PM10 pollution, land cover, or population layer to show on the same map.</p>
-					</header>
-					<div class="pollutant-map-shell">
-						<div class="map-toolbar">
-							<label for="pm10-basemap">
-								Basemap
-								<select id="pm10-basemap" class="basemap-select">
-									<option value="osm">OSM</option>
-									<option value="satellite">Satellite</option>
-								</select>
-							</label>
-							<label for="pm10-layer">
-								Layer
-								<select id="pm10-layer" class="layer-select">
-									<option value="none">None</option>
-									<optgroup label="Pollution">
-										<option value="cams-pm10-2023-12" data-label="CAMS PM10 2023 12" data-layer="gisgeoserver_13:Bulgaria_CAMS_average_2023_12" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">CAMS PM10 2023 12</option>
-										<option value="average-2023" data-label="Average PM10 2023" data-layer="gisgeoserver_13:Bulgaria_average_pm10_2023" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Average PM10 2023</option>
-										<option value="amac" data-label="PM10 AMAC 2021-2023" data-layer="gisgeoserver_13:Bulgaria_pm10_2021_2023_AMAC_map" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-has-legend="true">PM10 AMAC 2021-2023</option>
-										<option value="concentration-2023" data-label="PM10 Concentration 2023" data-layer="gisgeoserver_13:Bulgaria_pm10_concentration_map_2023" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">PM10 Concentration 2023</option>
-									</optgroup>
-									<optgroup label="Land Cover">
-										<option value="landcover-lcc" data-label="Land Cover Change 2021-2023" data-layer="gisgeoserver_13:Bulgaria_LCC_2021_2023_light" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Land Cover Change 2021-2023</option>
-										<option value="landcover-zonal-statistics" data-label="Land Cover Zonal Statistics" data-layer="gisgeoserver_13:bulgaria_pm10_zonal_statistics_2021_2023__bg_zonal_statistics" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Zonal Statistics</option>
-									</optgroup>
-									<optgroup label="Population">
-										<option value="population-bivariate" data-label="PM10 Population Bivariate" data-layer="gisgeoserver_13:pm10_pop_Bulgaria_pm10_2023_bivariate" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Bivariate</option>
-										<option value="population-chart" data-label="PM10 Population Chart" data-layer="gisgeoserver_13:pm10_pop_Bulgaria_pm10_2023_chart" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Chart</option>
-									</optgroup>
-								</select>
-							</label>
-						</div>
-						<div class="pollutant-map" id="pm10-map" data-map-center-lat="42.7661" data-map-center-lng="25.2383" data-map-zoom="7"></div>
-						<p class="map-status">No overlay selected.</p>
-					</div>
-					<div class="output-viewer">
-						<div class="output-toolbar">
-							<label for="output-category">
-								Output Category
-								<select id="output-category" class="output-category-select">
-									<option value="pollution">Pollution</option>
-									<option value="landcover" selected>Land Cover</option>
-									<option value="population">Population</option>
-								</select>
-							</label>
-						</div>
-						<div class="output-display">
-							<article class="output-panel" data-output-panel="pollution" hidden>
-								<h3>Pollution Output</h3>
-								<div class="output-placeholder">
-									<p>No pollution chart or table file is attached yet.</p>
-								</div>
-							</article>
-							<article class="output-panel" data-output-panel="landcover">
-								<h3>Land Cover Output</h3>
-								<img class="output-image" src="assets/data/landcover/zonal-statistics-lcc.png" alt="Zonal Statistics by Land Cover Change" />
-								<h4>Bulgaria 2021-2023 Data Table</h4>
-								<div class="table-wrapper output-table-frame">
-									<table class="compact-data-table">
-										<thead>
-											<tr>
-												<th>Indicator</th>
-												<th>Value</th>
-												<th>Category</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr><td>stability(persistence)</td><td>0.9493</td><td>N/A (Baseline)</td></tr>
-											<tr><td>Primary source of gain</td><td>0.6216</td><td>Rangeland (code11)</td></tr>
-											<tr><td>Secondary source of gain</td><td>0.3295</td><td>Crops (code5)</td></tr>
-											<tr><td>Third source of gain</td><td>0.0333</td><td>Built (code7)</td></tr>
-											<tr><td>Primary source of destination</td><td>0.8436</td><td>Rangeland (code11)</td></tr>
-											<tr><td>Secondary source of destination</td><td>0.1288</td><td>Crops (code5)</td></tr>
-											<tr><td>Third source of destination</td><td>0.0184</td><td>Built (code7)</td></tr>
-										</tbody>
-									</table>
-								</div>
-							</article>
-							<article class="output-panel" data-output-panel="population" hidden>
-								<h3>Population Output</h3>
-								<img class="output-image" src="assets/data/population/pm10-population-exposure.png" alt="PM10 Population Exposure in Bulgaria 2023" />
-							</article>
-						</div>
-					</div>
-				</section>
-
-				<section class="post lab-notes" id="notes">
-					<header>
-						<h2>GeoServer Connection Notes</h2>
-					</header>
-					<p>Each pollutant map has one basemap and one selectable overlay layer. To connect a layer, put the WMS endpoint in <code>data-geoserver-url</code> and the full workspace-qualified layer name in <code>data-layer</code> on the corresponding dropdown option.</p>
-					<p>Legend images are loaded separately with GeoServer <code>GetLegendGraphic</code>. A legend is displayed only for dropdown options marked with <code>data-has-legend="true"</code>, such as the PM10 AMAC layer.</p>
-					<table>
-						<thead>
-							<tr>
-								<th>Pollutant</th>
-								<th>Map behavior</th>
-								<th>Layer choices</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>NO2</td>
-								<td>One full-width basemap</td>
-								<td>Pollution / Land Cover / Population placeholders</td>
-							</tr>
-							<tr>
-								<td>PM2.5</td>
-								<td>One full-width basemap</td>
-								<td>Pollution / Land Cover / Population placeholders</td>
-							</tr>
-							<tr>
-								<td>PM10</td>
-								<td>One full-width basemap</td>
-								<td>Four pollution layers, two land cover layers, and two population layers from GeoServer</td>
-							</tr>
-						</tbody>
-					</table>
-				</section>
-
 			</div>
 
 			<footer id="footer">
 				<section>
 					<h2>Project Information</h2>
-					<p>GIS Lab 2026 pollutant layer viewer draft. Final GeoServer layers, legends, and analysis text can be added after the WMS layers are published.</p>
+					<p>GIS Lab 2026 pollutant layer viewer draft for Bulgaria. Workflow, results, and WebGIS are separated into independent pages.</p>
 				</section>
 				<section class="split contact">
 					<section>
@@ -282,7 +69,6 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
-		<script src="assets/js/map-demo.js?v=20260603-controls"></script>
 
 	</body>
 </html>

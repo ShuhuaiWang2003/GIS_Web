@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>GIS Lab 2026 - Workflow</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/custom.css?v=20260604-pages" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<div id="wrapper" class="fade-in">
+
+			<div id="intro">
+				<h1>Workflow</h1>
+				<p>GIS project process for Bulgaria.</p>
+			</div>
+
+			<header id="header">
+				<a href="index.html" class="logo">GIS Lab 2026</a>
+			</header>
+
+			<nav id="nav">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="workflow.html">Workflow</a></li>
+					<li><a href="results.html">Results</a></li>
+					<li><a href="webgis.html">WebGIS</a></li>
+				</ul>
+			</nav>
+
+			<div id="main">
+				<article class="post content-page">
+					<header class="major">
+						<span class="date">Case Study: Bulgaria</span>
+						<h2>Workflow</h2>
+						<p>Mapping air quality, land cover transitions, and population exposure.</p>
+					</header>
+					<section>
+					<p>The project followed a GIS-based workflow to analyze air quality, land cover change, and population exposure in Bulgaria. CAMS pollutant data for NO2, PM2.5, and PM10 were downloaded, clipped to the Bulgarian national boundary, and processed into December 2023 pollutant maps and annual average maps for 2021 and 2023.</p>
+					<p>The 2023 annual pollutant maps for Bulgaria were reclassified into concentration classes according to air-quality thresholds, with pollutant concentrations expressed in µg/m³. Annual mean change maps were then created by subtracting the 2021 pollutant averages from the 2023 averages, allowing spatial increases and decreases in pollution across Bulgaria to be identified.</p>
+					<p>Land cover data from ESRI 10 m Annual Land Cover for 2021 and 2023 were processed to create a Bulgaria land cover transition map. The transition analysis was used to calculate stable pixels, gains, and losses for the assigned land cover class, supporting interpretation of how land cover dynamics may relate to environmental change.</p>
+					<p>Finally, population data and administrative boundaries for Bulgaria were combined with pollutant layers through zonal statistics. Bivariate maps and chart layers were produced to compare population distribution with pollutant concentration levels. The processed layers, statistical tables, charts, legends, and maps were integrated into a website and WebGIS for clear and interactive presentation.</p>
+					</section>
+					<section>
+						<header>
+							<h3>Workflow Diagram</h3>
+						</header>
+						<div class="table-wrapper">
+							<table class="workflow-table">
+								<tbody>
+								<tr><th>Step</th><th>Process</th><th>Output / Purpose</th></tr>
+								<tr><td>1</td><td>Data Collection</td><td>CAMS pollutant data, ESRI 10 m land cover, WorldPop population data, and administrative boundaries for Bulgaria.</td></tr>
+								<tr><td>2</td><td>Pre-processing</td><td>Clip layers to the Bulgarian boundary, organize raster data, and prepare QGIS layers.</td></tr>
+								<tr><td>3</td><td>Pollutant Mapping</td><td>Create December 2023 pollutant maps and annual average maps for NO2, PM2.5, and PM10 in Bulgaria.</td></tr>
+								<tr><td>4</td><td>Annual Change Detection</td><td>Calculate 2023 annual average minus 2021 annual average to detect pollution increase and decrease.</td></tr>
+								<tr><td>5</td><td>Land Cover Change</td><td>Generate the 2021-2023 Bulgaria land cover transition raster and classify stable, gain, and loss pixels.</td></tr>
+								<tr><td>6</td><td>Zonal Statistics</td><td>Compute regional pollutant and population statistics using Bulgarian administrative boundaries.</td></tr>
+								<tr><td>7</td><td>Population Exposure Analysis</td><td>Create bivariate layers combining pollutant classes with population classes.</td></tr>
+								<tr><td>8</td><td>Website/WebGIS</td><td>Publish maps, tables, charts, legends, and explanations in the website and WebGIS.</td></tr>
+								<tr><td>9</td><td>Final Submission</td><td>Submit processed GIS outputs and website/WebGIS code through active download links.</td></tr>
+								</tbody>
+							</table>
+						</div>
+					</section>
+				</article>
+			</div>
+
+			<footer id="footer">
+				<section>
+					<h2>Project Information</h2>
+					<p>GIS Lab 2026 pollutant layer viewer draft for Bulgaria. Workflow, results, and WebGIS are separated into independent pages.</p>
+				</section>
+				<section class="split contact">
+					<section>
+						<h3>Pollutants</h3>
+						<p>NO2 / PM2.5 / PM10</p>
+					</section>
+					<section>
+						<h3>Layer Types</h3>
+						<p>Pollution / Land Cover / Population</p>
+					</section>
+				</section>
+			</footer>
+
+			<div id="copyright">
+				<ul><li>GIS Lab 2026</li><li>Template: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+			</div>
+
+		</div>
+
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
