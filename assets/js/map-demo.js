@@ -55,11 +55,12 @@
 			label: "NO2 Population Bivariate"
 		},
 		"assets/legend/no2/chart.sld": {
-			type: "symbol",
+			type: "items",
 			title: "NO2 Population Chart",
-			fill: "#d5b43c",
-			stroke: "#232323",
-			label: "NO2 Population Chart"
+			items: [
+				{ color: "#ffffff", label: "Class 1: pol_class_max = 1, NO2 annual average <= 10 \u00b5g/m\u00b3" },
+				{ color: "#e0ffff", label: "Class 2: pol_class_max = 2, NO2 annual average > 10 \u00b5g/m\u00b3" }
+			]
 		},
 		"assets/legend/no2/zonal%20statistics.sld": {
 			type: "pattern",
