@@ -70,6 +70,14 @@
 			type: "pattern",
 			title: "NO2 Land Cover Zonal Statistics",
 			label: "Zonal statistics pattern fill"
+		},
+		"assets/legend/pm10/chart.sld": {
+			type: "items",
+			title: "PM10 Population Chart",
+			items: [
+				{ color: "#fffffe", label: "Class 1 (\u226415 \u00b5g/m\u00b3)" },
+				{ color: "#ddfffd", label: "Class 2 (15\u201330 \u00b5g/m\u00b3)" }
+			]
 		}
 	};
 
