@@ -11,21 +11,21 @@
 	var MAX_WEB_MERCATOR_LAT = 85.05112878;
 	var SLD_LEGEND_CACHE = {};
 	var LOCAL_SLD_LEGENDS = {
-		"assets/legend/no2/cams_12.sld": {
+		"assets/legend/no2/2023_12.qml": {
 			type: "gradient",
 			title: "CAMS NO2 2023 12",
 			startColor: "#000000",
 			endColor: "#ffffff",
-			startLabel: "0",
-			endLabel: "255"
+			startLabel: "1.12537",
+			endLabel: "24.9375"
 		},
-		"assets/legend/no2/average_2023.sld": {
+		"assets/legend/no2/average_2023.qml": {
 			type: "gradient",
 			title: "Average NO2 2023",
 			startColor: "#000000",
 			endColor: "#ffffff",
-			startLabel: "0",
-			endLabel: "255"
+			startLabel: "1.09367",
+			endLabel: "14.0088"
 		},
 		"assets/legend/no2/concentration.sld": {
 			type: "items",
