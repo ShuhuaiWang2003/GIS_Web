@@ -566,6 +566,29 @@ button.map-control-button:focus {
 	padding-top: 1.5rem;
 }
 
+.pollutant-output-grid {
+	align-items: start;
+	display: grid;
+	gap: 1.25rem;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	margin-top: 2rem;
+}
+
+.result-empty-note {
+	align-items: center;
+	background: #f4f7f9;
+	border: solid 1px #eeeeee;
+	border-radius: 4px;
+	color: #717981;
+	display: flex;
+	min-height: 11rem;
+	padding: 1rem;
+}
+
+.result-empty-note p {
+	margin-bottom: 0;
+}
+
 .results-grid {
 	display: grid;
 	gap: 1.25rem;
@@ -798,7 +821,8 @@ body.image-lightbox-open {
 
 @media screen and (max-width: 980px) {
 	.summary-grid,
-	.results-grid {
+	.results-grid,
+	.pollutant-output-grid {
 		grid-template-columns: 1fr;
 	}
 
