@@ -525,6 +525,7 @@ button.image-viewer-button:focus {
 .landcover-stat-table {
 	border-collapse: separate;
 	border-spacing: 0;
+	min-width: 34rem;
 	overflow: hidden;
 }
 
