@@ -9,6 +9,7 @@
 	var MIN_ZOOM = 5;
 	var MAX_ZOOM = 12;
 	var MAX_WEB_MERCATOR_LAT = 85.05112878;
+	var SLD_LEGEND_CACHE = {};
 
 	function getNumber(value, fallback) {
 		var parsed = parseFloat(value);
@@ -159,6 +160,185 @@
 		return legendNode;
 	}
 
+	function escapeHtml(value) {
+		return String(value || "")
+			.replace(/&/g, "&amp;")
+			.replace(/</g, "&lt;")
+			.replace(/>/g, "&gt;")
+			.replace(/"/g, "&quot;")
+			.replace(/'/g, "&#39;");
+	}
+
+	function cleanColor(value, fallback) {
+		return /^#[0-9a-f]{3,8}$/i.test(value || "") ? value : fallback;
+	}
+
+	function getElementsByLocalName(root, localName) {
+		return Array.prototype.slice.call(root.getElementsByTagName("*")).filter(function (node) {
+			return node.localName === localName;
+		});
+	}
+
+	function getFirstTextByLocalName(root, localName) {
+		var node = getElementsByLocalName(root, localName)[0];
+
+		return node ? node.textContent.trim() : "";
+	}
+
+	function getSymbolParameter(root, parameterName) {
+		var parameter = getElementsByLocalName(root, "SvgParameter").concat(getElementsByLocalName(root, "CssParameter")).filter(function (node) {
+			return node.getAttribute("name") === parameterName;
+		})[0];
+
+		return parameter ? parameter.textContent.trim() : "";
+	}
+
+	function getOnlineResourceHref(root) {
+		var resource = getElementsByLocalName(root, "OnlineResource")[0];
+
+		if (!resource) {
+			return "";
+		}
+
+		return resource.getAttribute("xlink:href") || resource.getAttributeNS("http://www.w3.org/1999/xlink", "href") || resource.getAttribute("href") || "";
+	}
+
+	function parseSldLegend(xmlText, fallbackTitle) {
+		var parser = new DOMParser();
+		var xml = parser.parseFromString(xmlText, "application/xml");
+		var parserError = getElementsByLocalName(xml, "parsererror")[0];
+		var colorEntries = getElementsByLocalName(xml, "ColorMapEntry");
+		var title = getFirstTextByLocalName(xml, "Title") || fallbackTitle;
+		var fillColor;
+		var strokeColor;
+		var graphicHref;
+		var hasLabels;
+
+		if (parserError) {
+			return {
+				type: "error",
+				title: fallbackTitle,
+				message: "Legend could not be read."
+			};
+		}
+
+		if (colorEntries.length) {
+			hasLabels = colorEntries.some(function (entry) {
+				return entry.getAttribute("label");
+			});
+
+			if (colorEntries.length === 2 && !hasLabels) {
+				return {
+					type: "gradient",
+					title: title,
+					startColor: cleanColor(colorEntries[0].getAttribute("color"), "#000000"),
+					endColor: cleanColor(colorEntries[1].getAttribute("color"), "#ffffff"),
+					startLabel: colorEntries[0].getAttribute("quantity") || "",
+					endLabel: colorEntries[1].getAttribute("quantity") || ""
+				};
+			}
+
+			return {
+				type: "items",
+				title: title,
+				items: colorEntries.map(function (entry) {
+					return {
+						color: cleanColor(entry.getAttribute("color"), "#cccccc"),
+						label: entry.getAttribute("label") || entry.getAttribute("quantity") || "Value"
+					};
+				})
+			};
+		}
+
+		fillColor = getSymbolParameter(xml, "fill");
+		strokeColor = getSymbolParameter(xml, "stroke");
+
+		if (fillColor) {
+			return {
+				type: "symbol",
+				title: title,
+				fill: cleanColor(fillColor, "#cccccc"),
+				stroke: cleanColor(strokeColor, "#232323"),
+				label: fallbackTitle
+			};
+		}
+
+		graphicHref = getOnlineResourceHref(xml);
+
+		if (graphicHref) {
+			return {
+				type: "pattern",
+				title: title,
+				label: "Pattern fill: " + graphicHref
+			};
+		}
+
+		return {
+			type: "error",
+			title: fallbackTitle,
+			message: "No visible legend rule was found."
+		};
+	}
+
+	function buildSldLegendHtml(model) {
+		var html = '<div class="sld-legend"><strong class="sld-legend-title">' + escapeHtml(model.title) + "</strong>";
+
+		if (model.type === "gradient") {
+			html += '<span class="sld-gradient" style="background:linear-gradient(90deg, ' + model.startColor + ', ' + model.endColor + ')"></span>';
+			html += '<span class="sld-gradient-labels"><em>' + escapeHtml(model.startLabel) + '</em><em>' + escapeHtml(model.endLabel) + "</em></span>";
+		} else if (model.type === "items") {
+			html += '<ul class="sld-legend-items">';
+			model.items.forEach(function (item) {
+				html += '<li><span class="sld-swatch" style="background:' + item.color + '"></span><span>' + escapeHtml(item.label) + "</span></li>";
+			});
+			html += "</ul>";
+		} else if (model.type === "symbol") {
+			html += '<ul class="sld-legend-items"><li><span class="sld-swatch" style="background:' + model.fill + '; border-color:' + model.stroke + '"></span><span>' + escapeHtml(model.label) + "</span></li></ul>";
+		} else if (model.type === "pattern") {
+			html += '<ul class="sld-legend-items"><li><span class="sld-swatch sld-pattern-swatch"></span><span>' + escapeHtml(model.label) + "</span></li></ul>";
+		} else {
+			html += '<p class="sld-legend-note">' + escapeHtml(model.message) + "</p>";
+		}
+
+		return html + "</div>";
+	}
+
+	function renderSldLegend(legendNode, sldUrl, label) {
+		var token = String(Date.now()) + String(Math.random());
+
+		legendNode.dataset.legendToken = token;
+		legendNode.hidden = false;
+		legendNode.innerHTML = '<div class="sld-legend"><strong class="sld-legend-title">' + escapeHtml(label) + '</strong><p class="sld-legend-note">Loading legend...</p></div>';
+
+		(SLD_LEGEND_CACHE[sldUrl] || (SLD_LEGEND_CACHE[sldUrl] = fetch(sldUrl).then(function (response) {
+			if (!response.ok) {
+				throw new Error("Legend file not found");
+			}
+
+			return response.text();
+		}).then(function (text) {
+			return parseSldLegend(text, label);
+		}).catch(function () {
+			return {
+				type: "error",
+				title: label,
+				message: "Legend file could not be loaded."
+			};
+		}))).then(function (model) {
+			if (legendNode.dataset.legendToken !== token) {
+				return;
+			}
+
+			legendNode.innerHTML = buildSldLegendHtml(model);
+			legendNode.hidden = false;
+		});
+	}
+
+	function renderGeoServerLegend(legendNode, geoserverUrl, layerName, styleName, label) {
+		legendNode.hidden = false;
+		legendNode.innerHTML = '<img alt="' + escapeHtml(label) + ' legend" src="' + escapeHtml(buildLegendUrl(geoserverUrl, layerName, styleName)) + '" />';
+	}
+
 	function updateLoadingProgress(mapNode, percent) {
 		var loadingNode = mapNode.querySelector(".map-loading");
 		var labelNode = loadingNode ? loadingNode.querySelector("[data-loading-label]") : null;
@@ -252,7 +432,9 @@
 		var layerName = selectedOption ? selectedOption.dataset.layer || "" : "";
 		var geoserverUrl = selectedOption ? selectedOption.dataset.geoserverUrl || "" : "";
 		var styleName = selectedOption ? selectedOption.dataset.style || "" : "";
+		var legendSldUrl = selectedOption ? selectedOption.dataset.legendSld || "" : "";
 		var isPanning = mapNode._panState && mapNode._panState.active;
+		var shouldShowSldLegend = selectedOption && !isPanning && legendSldUrl;
 		var shouldShowLegend = selectedOption && !isPanning && selectedOption.dataset.hasLegend === "true" && geoserverUrl && layerName;
 		var boundsNorthWest = worldToLonLat(geometry.topLeft.x, geometry.topLeft.y, geometry.zoom);
 		var boundsSouthEast = worldToLonLat(geometry.bottomRight.x, geometry.bottomRight.y, geometry.zoom);
@@ -303,17 +485,14 @@
 		mapNode.innerHTML = html;
 
 		var legendNode = getLegendNode(mapNode);
-		var legendImage = legendNode.querySelector("img");
 
-		if (shouldShowLegend && legendImage) {
-			legendImage.src = buildLegendUrl(geoserverUrl, layerName, styleName);
-			legendImage.alt = label + " legend";
-			legendNode.hidden = false;
+		if (shouldShowSldLegend) {
+			renderSldLegend(legendNode, legendSldUrl, label);
+		} else if (shouldShowLegend) {
+			renderGeoServerLegend(legendNode, geoserverUrl, layerName, styleName, label);
 		} else {
-			if (legendImage) {
-				legendImage.removeAttribute("src");
-			}
-
+			legendNode.dataset.legendToken = "";
+			legendNode.innerHTML = '<img alt="Selected layer legend" />';
 			legendNode.hidden = true;
 		}
 

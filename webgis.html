@@ -10,7 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/custom.css?v=20260604-interaction" />
+		<link rel="stylesheet" href="assets/css/custom.css?v=20260605-no2-legend" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -57,18 +57,18 @@
 								<select id="no2-layer" class="layer-select">
 									<option value="none">None</option>
 									<optgroup label="Pollution">
-										<option value="cams-no2-2023-12" data-label="CAMS NO2 2023 12" data-layer="gisgeoserver_13:bulgaria_CAMS_no2_2023_12" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">CAMS NO2 2023 12</option>
-										<option value="average-no2-2023" data-label="Average NO2 2023" data-layer="gisgeoserver_13:bulgaria_average_no2_2023" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Average NO2 2023</option>
-										<option value="no2-amac" data-label="NO2 AMAC 2021-2023" data-layer="gisgeoserver_13:bulgria_no2_2021_2023_AMAC_map" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-has-legend="true">NO2 AMAC 2021-2023</option>
-										<option value="no2-concentration-2023" data-label="NO2 Concentration 2023" data-layer="gisgeoserver_13:bulgaria_no2_concentration_map_2023" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">NO2 Concentration 2023</option>
+										<option value="cams-no2-2023-12" data-label="CAMS NO2 2023 12" data-layer="gisgeoserver_13:bulgaria_CAMS_no2_2023_12" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-legend-sld="assets/legend/no2/cams_12.sld">CAMS NO2 2023 12</option>
+										<option value="average-no2-2023" data-label="Average NO2 2023" data-layer="gisgeoserver_13:bulgaria_average_no2_2023" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-legend-sld="assets/legend/no2/average_2023.sld">Average NO2 2023</option>
+										<option value="no2-amac" data-label="NO2 AMAC 2021-2023" data-layer="gisgeoserver_13:bulgria_no2_2021_2023_AMAC_map" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-legend-sld="assets/legend/no2/bulgria_no2_2021_2023_AMAC_map_geoserver.sld">NO2 AMAC 2021-2023</option>
+										<option value="no2-concentration-2023" data-label="NO2 Concentration 2023" data-layer="gisgeoserver_13:bulgaria_no2_concentration_map_2023" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-legend-sld="assets/legend/no2/concentration.sld">NO2 Concentration 2023</option>
 									</optgroup>
 									<optgroup label="Land Cover">
 										<option value="no2-landcover-lcc" data-label="Land Cover Change 2021-2023" data-layer="gisgeoserver_13:Bulgaria_LCC_2021_2023_light" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Land Cover Change 2021-2023</option>
-										<option value="no2-landcover-zonal-statistics" data-label="NO2 Land Cover Zonal Statistics" data-layer="gisgeoserver_13:Bulgaria_no2_zonal_statistics_2021_2023" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Zonal Statistics</option>
+										<option value="no2-landcover-zonal-statistics" data-label="NO2 Land Cover Zonal Statistics" data-layer="gisgeoserver_13:Bulgaria_no2_zonal_statistics_2021_2023" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-legend-sld="assets/legend/no2/zonal%20statistics.sld">Zonal Statistics</option>
 									</optgroup>
 									<optgroup label="Population">
-										<option value="no2-population-bivariate" data-label="NO2 Population Bivariate" data-layer="gisgeoserver_13:no2_pop_Bulgaria_no2_2023_bivariate" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Bivariate</option>
-										<option value="no2-population-chart" data-label="NO2 Population Chart" data-layer="gisgeoserver_13:bulgaria_no2_2023_chart__pie_chart" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms">Chart</option>
+										<option value="no2-population-bivariate" data-label="NO2 Population Bivariate" data-layer="gisgeoserver_13:no2_pop_Bulgaria_no2_2023_bivariate" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-legend-sld="assets/legend/no2/bivariate.sld">Bivariate</option>
+										<option value="no2-population-chart" data-label="NO2 Population Chart" data-layer="gisgeoserver_13:bulgaria_no2_2023_chart__pie_chart" data-geoserver-url="https://www.gis-geoserver.polimi.it/geoserver/gisgeoserver_13/wms" data-legend-sld="assets/legend/no2/chart.sld">Chart</option>
 									</optgroup>
 								</select>
 							</label>
@@ -182,7 +182,7 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
-		<script src="assets/js/map-demo.js?v=20260604-interaction"></script>
+		<script src="assets/js/map-demo.js?v=20260605-no2-legend"></script>
 
 	</body>
 </html>
