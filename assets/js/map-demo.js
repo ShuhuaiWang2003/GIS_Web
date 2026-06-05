@@ -28,12 +28,12 @@
 			endLabel: "255"
 		},
 		"assets/legend/no2/concentration.sld": {
-			type: "gradient",
+			type: "items",
 			title: "NO2 Concentration 2023",
-			startColor: "#000000",
-			endColor: "#ffffff",
-			startLabel: "0",
-			endLabel: "255"
+			items: [
+				{ color: "#000000", label: "Class 1" },
+				{ color: "#ffffff", label: "Class 2" }
+			]
 		},
 		"assets/legend/no2/bulgria_no2_2021_2023_AMAC_map_geoserver.sld": {
 			type: "items",

@@ -21,9 +21,9 @@
                 </sld:ContrastEnhancement>
               </sld:GrayChannel>
             </sld:ChannelSelection>
-            <sld:ColorMap>
-              <sld:ColorMapEntry quantity="0" color="#000000"/>
-              <sld:ColorMapEntry quantity="255" color="#ffffff"/>
+            <sld:ColorMap type="values">
+              <sld:ColorMapEntry quantity="1" color="#000000" label="Class 1"/>
+              <sld:ColorMapEntry quantity="2" color="#ffffff" label="Class 2"/>
             </sld:ColorMap>
           </sld:RasterSymbolizer>
         </sld:Rule>
