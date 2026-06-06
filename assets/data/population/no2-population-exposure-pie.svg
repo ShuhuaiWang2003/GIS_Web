@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">NO2 Population Exposure in Bulgaria 2023</title>
+  <desc id="desc">Pie chart showing population exposure proportions for NO2 concentration classes in Bulgaria in 2023.</desc>
+  <rect width="960" height="540" fill="#ffffff"/>
+  <rect x="1" y="1" width="958" height="538" fill="none" stroke="#d9d9d9" stroke-width="2"/>
+  <text x="480" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#595959">NO2 Population Exposure in Bulgaria (2023)</text>
+
+  <g stroke="#ffffff" stroke-width="3">
+    <path d="M480 270 L480 90 A180 180 0 0 1 637.9 356.8 Z" fill="#5b9bd5"/>
+    <path d="M480 270 L637.9 356.8 A180 180 0 1 1 480 90 Z" fill="#ed7d31"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4d4d4d">
+    <polyline points="635,210 725,180 660,180" fill="none" stroke="#bfbfbf" stroke-width="1.5"/>
+    <rect x="660" y="145" width="150" height="54" fill="#ffffff" stroke="#a6a6a6" stroke-width="1"/>
+    <text x="735" y="167" text-anchor="middle">Class 1 (&#8804;10 &#181;g/m&#179;)</text>
+    <text x="735" y="187" text-anchor="middle">33%</text>
+
+    <polyline points="344,402 235,388 275,388" fill="none" stroke="#bfbfbf" stroke-width="1.5"/>
+    <rect x="145" y="370" width="150" height="54" fill="#ffffff" stroke="#a6a6a6" stroke-width="1"/>
+    <text x="220" y="392" text-anchor="middle">Class 2 (10&#8211;25 &#181;g/m&#179;)</text>
+    <text x="220" y="412" text-anchor="middle">67%</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4d4d4d">
+    <rect x="360" y="510" width="10" height="10" fill="#5b9bd5"/>
+    <text x="378" y="520">Class 1 (&#8804;10 &#181;g/m&#179;)</text>
+    <rect x="530" y="510" width="10" height="10" fill="#ed7d31"/>
+    <text x="548" y="520">Class 2 (10&#8211;25 &#181;g/m&#179;)</text>
+  </g>
+</svg>

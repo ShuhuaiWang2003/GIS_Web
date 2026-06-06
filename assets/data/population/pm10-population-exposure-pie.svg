@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">PM10 Population Exposure in Bulgaria 2023</title>
+  <desc id="desc">Pie chart showing population exposure proportions for PM10 concentration classes in Bulgaria in 2023.</desc>
+  <rect width="960" height="540" fill="#ffffff"/>
+  <rect x="1" y="1" width="958" height="538" fill="none" stroke="#d9d9d9" stroke-width="2"/>
+  <text x="480" y="42" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" fill="#595959">PM10 Population Exposure in Bulgaria (2023)</text>
+
+  <g stroke="#ffffff" stroke-width="3">
+    <path d="M480 270 L480 90 A180 180 0 0 1 642.8 193.4 Z" fill="#5b9bd5"/>
+    <path d="M480 270 L642.8 193.4 A180 180 0 1 1 480 90 Z" fill="#ed7d31"/>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#4d4d4d">
+    <polyline points="620,196 720,160 650,160" fill="none" stroke="#bfbfbf" stroke-width="1.5"/>
+    <rect x="650" y="118" width="150" height="54" fill="#ffffff" stroke="#a6a6a6" stroke-width="1"/>
+    <text x="725" y="140" text-anchor="middle">Class 1 (&#8804;15 &#181;g/m&#179;)</text>
+    <text x="725" y="160" text-anchor="middle">18%</text>
+
+    <polyline points="352,404 280,438 325,438" fill="none" stroke="#bfbfbf" stroke-width="1.5"/>
+    <rect x="185" y="415" width="150" height="54" fill="#ffffff" stroke="#a6a6a6" stroke-width="1"/>
+    <text x="260" y="437" text-anchor="middle">Class 2 (15&#8211;31 &#181;g/m&#179;)</text>
+    <text x="260" y="457" text-anchor="middle">82%</text>
+  </g>
+
+  <g font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#4d4d4d">
+    <rect x="360" y="510" width="10" height="10" fill="#5b9bd5"/>
+    <text x="378" y="520">Class 1 (&#8804;15 &#181;g/m&#179;)</text>
+    <rect x="530" y="510" width="10" height="10" fill="#ed7d31"/>
+    <text x="548" y="520">Class 2 (15&#8211;31 &#181;g/m&#179;)</text>
+  </g>
+</svg>
