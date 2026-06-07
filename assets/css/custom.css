@@ -691,51 +691,49 @@ button.image-viewer-button:focus {
 }
 
 .landcover-stat-table caption {
-	background: #212931;
+	background: #1f3f73;
 	color: #ffffff;
 	font-family: "Source Sans Pro", Helvetica, sans-serif;
 	font-size: 0.86rem;
 	font-weight: 900;
-	letter-spacing: 0.04em;
+	letter-spacing: 0;
 	line-height: 1.25;
 	padding: 0.65rem 0.75rem;
-	text-align: left;
-	text-transform: uppercase;
+	text-align: center;
+	text-transform: none;
 }
 
 .landcover-stat-table thead th {
-	background: #eef3f6;
-	border-bottom: solid 2px #cfd8df;
-	color: #212931;
+	background: #4a76c4;
+	border-bottom: solid 2px #c5cfe0;
+	color: #ffffff;
 }
 
 .landcover-stat-table .stat-section-label th {
 	border-top: solid 3px #ffffff;
-	color: #212931;
+	color: #0f376d;
 	font-size: 0.72rem;
 	font-weight: 900;
-	letter-spacing: 0.05em;
+	letter-spacing: 0;
 	padding-top: 0.5rem;
-	text-transform: uppercase;
+	text-transform: none;
 }
 
-.landcover-stat-table .stat-section-baseline td,
-.landcover-stat-table .stat-section-baseline .stat-section-label th {
-	background: #f4f7f9;
+.landcover-stat-table .stat-section-label th {
+	background: #d8e1f0;
+}
+
+.landcover-stat-table .stat-section-baseline td {
+	background: #fff2cc;
 }
 
 .landcover-stat-table .stat-section-gain td,
-.landcover-stat-table .stat-section-gain .stat-section-label th {
-	background: #edf8f3;
-}
-
-.landcover-stat-table .stat-section-destination td,
-.landcover-stat-table .stat-section-destination .stat-section-label th {
-	background: #fff4ec;
+.landcover-stat-table .stat-section-destination td {
+	background: #ffffff;
 }
 
 .landcover-stat-table .stat-section + .stat-section .stat-section-label th {
-	border-top-color: #d9dee3;
+	border-top-color: #c5cfe0;
 }
 
 .result-text-placeholder {
