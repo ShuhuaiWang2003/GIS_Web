@@ -10,7 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/custom.css?v=20260604-pages" />
+		<link rel="stylesheet" href="assets/css/custom.css?v=20260607-home-workflow" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -43,10 +43,11 @@
 						<p>Mapping air quality, land cover transitions, and population exposure.</p>
 					</header>
 					<section>
-					<p>The project followed a GIS-based workflow to analyze air quality, land cover change, and population exposure in Bulgaria. CAMS pollutant data for NO2, PM2.5, and PM10 were downloaded, clipped to the Bulgarian national boundary, and processed into December 2023 pollutant maps and annual average maps for 2021 and 2023.</p>
-					<p>The 2023 annual pollutant maps for Bulgaria were reclassified into concentration classes according to air-quality thresholds, with pollutant concentrations expressed in µg/m³. Annual mean change maps were then created by subtracting the 2021 pollutant averages from the 2023 averages, allowing spatial increases and decreases in pollution across Bulgaria to be identified.</p>
-					<p>Land cover data from ESRI 10 m Annual Land Cover for 2021 and 2023 were processed to create a Bulgaria land cover transition map. The transition analysis was used to calculate stable pixels, gains, and losses for the assigned land cover class, supporting interpretation of how land cover dynamics may relate to environmental change.</p>
-					<p>Finally, population data and administrative boundaries for Bulgaria were combined with pollutant layers through zonal statistics. Bivariate maps and chart layers were produced to compare population distribution with pollutant concentration levels. The processed layers, statistical tables, charts, legends, and maps were integrated into a website and WebGIS for clear and interactive presentation.</p>
+						<p>The project followed a GIS-based workflow to analyse air quality, land cover change, and population exposure in Bulgaria. Multiple environmental and socio-economic datasets were integrated to investigate the relationships between pollution, land cover dynamics, and population distribution.</p>
+						<p>CAMS atmospheric data for NO<sub>2</sub>, PM<sub>2.5</sub>, and PM<sub>10</sub> were downloaded and clipped to the Bulgarian national boundary. Monthly data were processed to generate December 2023 pollutant maps and annual average concentration maps for 2021 and 2023. The 2023 annual average maps were subsequently reclassified into concentration classes according to predefined air-quality thresholds, producing Concentration Classification maps with pollutant concentrations expressed in &micro;g/m<sup>3</sup>. Finally, Annual Mean Absolute Change (AMAC) maps were created by subtracting the 2021 annual averages from the 2023 annual averages, allowing areas with increasing or decreasing pollution levels to be identified.</p>
+						<p>Land cover analysis was performed using the ESRI 10 m Annual Land Cover datasets for 2021 and 2023. Three land cover categories were analysed: Built-up Areas, Crops, and Trees, associated respectively with NO<sub>2</sub>, PM<sub>2.5</sub>, and PM<sub>10</sub>. Land Cover Change (LCC) maps were generated to identify Stable, Gain, and Loss pixels between 2021 and 2023. The resulting transition layers were further analysed using zonal statistics to summarize regional land cover dynamics. Statistical charts describing the mean, minimum, and maximum values of Stable, Gain, and Loss categories were produced together with summary tables reporting the proportion of Stable pixels and the dominant transition pathways. Pixel percentages were calculated using the original raster geometry in EPSG:4326, while area calculations were performed in the equal-area projection EPSG:3035 to ensure accurate area estimation.</p>
+						<p>Population exposure analysis was carried out by combining WorldPop population data, Bulgarian administrative boundaries, and pollutant concentration layers. Zonal statistics were used to aggregate population and pollution information at the administrative-unit level. Pollutant concentration classes were then combined with population classes to generate Bivariate Maps, highlighting areas where elevated pollution levels coincide with high population density. Additional Population Exposure Charts and summary tables were created to support quantitative interpretation of exposure patterns across Bulgaria.</p>
+						<p>All processed datasets, maps, statistical outputs, charts, legends, and explanatory content were integrated into a website and WebGIS platform. The final system enables interactive visualization of pollution patterns, land cover dynamics, and population exposure, providing a comprehensive overview of environmental conditions in Bulgaria.</p>
 					</section>
 					<section>
 						<header>
@@ -54,20 +55,42 @@
 						</header>
 						<div class="table-wrapper">
 							<table class="workflow-table">
+								<thead>
+									<tr><th>Step</th><th>Process</th><th>Output / Purpose</th></tr>
+								</thead>
 								<tbody>
-								<tr><th>Step</th><th>Process</th><th>Output / Purpose</th></tr>
-								<tr><td>1</td><td>Data Collection</td><td>CAMS pollutant data, ESRI 10 m land cover, WorldPop population data, and administrative boundaries for Bulgaria.</td></tr>
-								<tr><td>2</td><td>Pre-processing</td><td>Clip layers to the Bulgarian boundary, organize raster data, and prepare QGIS layers.</td></tr>
-								<tr><td>3</td><td>Pollutant Mapping</td><td>Create December 2023 pollutant maps and annual average maps for NO2, PM2.5, and PM10 in Bulgaria.</td></tr>
-								<tr><td>4</td><td>Annual Change Detection</td><td>Calculate 2023 annual average minus 2021 annual average to detect pollution increase and decrease.</td></tr>
-								<tr><td>5</td><td>Land Cover Change</td><td>Generate the 2021-2023 Bulgaria land cover transition raster and classify stable, gain, and loss pixels.</td></tr>
-								<tr><td>6</td><td>Zonal Statistics</td><td>Compute regional pollutant and population statistics using Bulgarian administrative boundaries.</td></tr>
-								<tr><td>7</td><td>Population Exposure Analysis</td><td>Create bivariate layers combining pollutant classes with population classes.</td></tr>
-								<tr><td>8</td><td>Website/WebGIS</td><td>Publish maps, tables, charts, legends, and explanations in the website and WebGIS.</td></tr>
-								<tr><td>9</td><td>Final Submission</td><td>Submit processed GIS outputs and website/WebGIS code through active download links.</td></tr>
+									<tr><td>1</td><td>Data Collection</td><td>Acquire CAMS pollutant data, ESRI 10 m Annual Land Cover data, WorldPop population data, and Bulgarian administrative boundaries.</td></tr>
+									<tr><td>2</td><td>Data Pre-processing</td><td>Clip datasets to the Bulgarian national boundary, organize raster layers, and prepare GIS datasets for analysis.</td></tr>
+									<tr><td>3</td><td>December 2023 Pollution Mapping</td><td>Generate December 2023 concentration maps for NO<sub>2</sub>, PM<sub>2.5</sub>, and PM<sub>10</sub>.</td></tr>
+									<tr><td>4</td><td>Annual Average Pollution Mapping</td><td>Calculate 2021 and 2023 annual average pollutant concentration maps.</td></tr>
+									<tr><td>5</td><td>Concentration Classification</td><td>Reclassify 2023 annual averages into concentration classes according to air-quality thresholds.</td></tr>
+									<tr><td>6</td><td>Annual Mean Absolute Change (AMAC)</td><td>Calculate 2023 annual average minus 2021 annual average to identify pollution increase and decrease.</td></tr>
+									<tr><td>7</td><td>Land Cover Change Detection</td><td>Generate 2021&ndash;2023 Land Cover Change maps for Built-up Areas, Crops, and Trees and classify Stable, Gain, and Loss pixels.</td></tr>
+									<tr><td>8</td><td>Land Cover Statistics</td><td>Produce zonal statistics layers, Stable/Gain/Loss charts, and land cover transition statistical tables.</td></tr>
+									<tr><td>9</td><td>Population Exposure Analysis</td><td>Generate bivariate maps, exposure charts, and population exposure tables by combining pollution and population data.</td></tr>
+									<tr><td>10</td><td>Website and WebGIS Development</td><td>Integrate maps, tables, charts, legends, and explanatory text into the website and WebGIS platform.</td></tr>
+									<tr><td>11</td><td>Final Submission</td><td>Publish the website and WebGIS and provide active download links for project deliverables.</td></tr>
 								</tbody>
 							</table>
 						</div>
+					</section>
+					<section>
+						<header>
+							<h3>Dataset Relationships</h3>
+						</header>
+						<div class="table-wrapper">
+							<table class="workflow-table">
+								<thead>
+									<tr><th>Pollutant</th><th>Land Cover Category</th><th>Population Analysis</th></tr>
+								</thead>
+								<tbody>
+									<tr><td>NO<sub>2</sub></td><td>Built-up Areas</td><td>Population Exposure</td></tr>
+									<tr><td>PM<sub>2.5</sub></td><td>Crops</td><td>Population Exposure</td></tr>
+									<tr><td>PM<sub>10</sub></td><td>Trees</td><td>Population Exposure</td></tr>
+								</tbody>
+							</table>
+						</div>
+						<p>The workflow ensures that air pollution, land cover change, and population exposure are analysed consistently and visualized through an integrated WebGIS environment, supporting the interpretation of environmental conditions and potential human exposure across Bulgaria.</p>
 					</section>
 				</article>
 			</div>

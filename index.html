@@ -6,11 +6,11 @@
 -->
 <html>
 	<head>
-		<title>GIS Lab 2026 - Home</title>
+		<title>Geographic Information Systems Lab - Home</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link rel="stylesheet" href="assets/css/custom.css?v=20260605-home-overview" />
+		<link rel="stylesheet" href="assets/css/custom.css?v=20260607-home-workflow" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-preload">
@@ -18,7 +18,7 @@
 		<div id="wrapper" class="fade-in">
 
 			<div id="intro">
-				<h1>GIS Lab 2026</h1>
+				<h1>geographic information systems lab<br />group-13</h1>
 			</div>
 
 			<header id="header">
@@ -36,11 +36,26 @@
 
 			<div id="main">
 				<article class="post featured home-blank">
-					<section class="home-gee-app">
-						<iframe src="https://eo-assignment2.projects.earthengine.app/view/bgboundaries" title="Bulgaria Boundary - Google Earth Engine" loading="lazy"></iframe>
-						<p class="home-gee-link">
-							<a href="https://eo-assignment2.projects.earthengine.app/view/bgboundaries" target="_blank" rel="noopener" class="button">Open Earth Engine App</a>
-						</p>
+					<section class="home-location-map">
+						<div class="pollutant-map-shell home-map-shell">
+							<div class="map-toolbar">
+								<label for="home-basemap">
+									Basemap
+									<select id="home-basemap" class="basemap-select">
+										<option value="osm">OSM</option>
+										<option value="satellite">Satellite</option>
+									</select>
+								</label>
+								<label for="home-layer" class="home-layer-control" hidden>
+									Layer
+									<select id="home-layer" class="layer-select">
+										<option value="none">None</option>
+									</select>
+								</label>
+							</div>
+							<div class="pollutant-map home-map" id="home-map" data-map-center-lat="42.7661" data-map-center-lng="25.2383" data-map-zoom="6" data-empty-status="Bulgaria geographic location."></div>
+							<p class="map-status">Bulgaria geographic location.</p>
+						</div>
 					</section>
 					<section class="home-study-overview">
 						<header class="major">
@@ -52,30 +67,30 @@
 						<p>The country's varied natural and human landscapes make it an ideal case study for geospatial analysis. Understanding the spatial relationships between environmental conditions, land use patterns, and population distribution is essential for supporting sustainable development, environmental management, and regional planning.</p>
 
 						<h3>Land Cover Characteristics</h3>
-						<p>Land cover represents the physical material present on the Earth's surface and provides valuable information about ecosystem conditions and human activities. Bulgaria exhibits a highly diverse land cover structure characterized by agricultural areas, forests, grasslands, wetlands, urban settlements, and water bodies.</p>
-						<p>Agricultural land occupies a significant portion of the country, particularly within the Danubian Plain and the Thracian Lowland, where favorable climatic and soil conditions support intensive farming activities. Forest ecosystems are concentrated in mountainous regions and play an important role in biodiversity conservation, carbon storage, and soil protection. Urban areas are primarily concentrated around major cities such as Sofia, Plovdiv, Varna, and Burgas, reflecting patterns of economic development and population concentration.</p>
-						<p>Analyzing land cover distribution provides insights into natural resource management, environmental sustainability, and the interactions between human activities and ecosystems.</p>
+						<p>Land cover represents the physical material present on the Earth's surface and provides valuable information about ecosystem conditions and human activities. Bulgaria exhibits a diverse land cover structure characterized by extensive agricultural land, forested areas, urban settlements, grasslands, wetlands, and water bodies.</p>
+						<p>Particular attention is given to three major land cover categories analysed in this project: <strong>Crops, Trees, and Built-up Areas</strong>. These classes represent agricultural activities, natural vegetation, and urban development, respectively, and provide important indicators of environmental and socio-economic change. Agricultural land occupies a significant portion of the country, particularly within the Danubian Plain and the Thracian Lowland, where favorable climatic and soil conditions support intensive farming activities. Forest ecosystems are concentrated in mountainous regions and play an important role in biodiversity conservation, carbon storage, and soil protection. Built-up areas are primarily concentrated around major cities such as Sofia, Plovdiv, Varna, and Burgas, reflecting patterns of economic development and population concentration.</p>
+						<p>Analyzing land cover distribution and change provides valuable insights into natural resource management, environmental sustainability, and the interactions between human activities and ecosystems.</p>
 
 						<h3>Air Pollution and Environmental Quality</h3>
 						<p>Air pollution is one of the most important environmental challenges affecting human health and ecosystem quality across Europe. In Bulgaria, pollution levels are influenced by a combination of industrial activities, transportation networks, residential heating, energy production, and meteorological conditions.</p>
-						<p>Particulate matter (PM10 and PM2.5) and nitrogen dioxide (NO2) are among the most significant pollutants due to their impacts on respiratory and cardiovascular health. Pollution patterns often vary spatially, with higher concentrations typically observed near urban centers, industrial zones, and major transportation corridors.</p>
+						<p>This project focuses on three key air pollutants: <strong>PM10, PM2.5, and NO2</strong>. These pollutants are widely used as indicators of air quality because of their significant impacts on human health and environmental quality. Pollution patterns often vary spatially, with higher concentrations typically observed near urban centers, industrial zones, and major transportation corridors.</p>
 						<p>Spatial analysis of air quality data enables the identification of pollution hotspots and supports evidence-based environmental policies. Understanding where pollution is concentrated is essential for improving public health, reducing environmental risks, and promoting sustainable urban development.</p>
 
 						<h3>Population Distribution</h3>
-						<p>Population distribution is a key indicator of human presence and socio-economic activity. Bulgaria has experienced significant demographic changes over recent decades, including population decline, aging, and migration toward major urban centers.</p>
+						<p>Population distribution is a key indicator of human presence and socio-economic activity. Bulgaria has experienced significant demographic changes over recent decades, including population decline, population aging, and migration toward major urban centers.</p>
 						<p>The highest population densities are generally found in Sofia and other regional cities, while many rural and mountainous areas exhibit lower population concentrations. These demographic patterns influence infrastructure demand, economic development, environmental pressures, and exposure to environmental hazards.</p>
 						<p>Studying population distribution together with land cover and pollution information provides a comprehensive understanding of how environmental conditions affect human communities and where potential environmental risks may have the greatest impact.</p>
 
 						<h3>Project Objectives</h3>
 						<p>This project integrates land cover, air pollution, and population datasets within a GIS environment to investigate the spatial characteristics of Bulgaria. Through geospatial analysis and visualization, the project aims to:</p>
 						<ul>
-							<li>Examine the distribution of major land cover categories;</li>
-							<li>Analyze spatial patterns of air pollution;</li>
-							<li>Investigate population density and settlement distribution;</li>
-							<li>Explore the relationships between environmental conditions and human activities;</li>
-							<li>Support sustainable planning and environmental decision-making through spatial data analysis.</li>
+							<li>Examine the distribution and recent changes of major land cover categories;</li>
+							<li>Analyze the spatial patterns of PM10, PM2.5, and NO2 concentrations;</li>
+							<li>Investigate population distribution across Bulgaria;</li>
+							<li>Evaluate population exposure to air pollution through spatial analysis;</li>
+							<li>Explore the relationships between land cover, air quality, and population distribution.</li>
 						</ul>
-						<p>The combination of these datasets provides a comprehensive perspective on Bulgaria's environmental and socio-economic landscape, demonstrating the value of GIS technologies in understanding complex spatial phenomena.</p>
+						<p>The analysis was performed using GIS and WebGIS technologies, combining raster processing, land cover change detection, spatial statistics, and web-based visualization techniques. By integrating environmental and socio-economic datasets, the project provides a comprehensive perspective on Bulgaria's landscape and demonstrates the value of geospatial technologies for understanding complex spatial phenomena and supporting sustainable planning and environmental decision-making.</p>
 					</section>
 				</article>
 			</div>
@@ -114,6 +129,7 @@
 		<script src="assets/js/breakpoints.min.js"></script>
 		<script src="assets/js/util.js"></script>
 		<script src="assets/js/main.js"></script>
+		<script src="assets/js/map-demo.js?v=20260607-home-location-map"></script>
 
 	</body>
 </html>

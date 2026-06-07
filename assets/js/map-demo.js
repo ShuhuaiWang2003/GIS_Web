@@ -693,7 +693,7 @@
 				statusNode.textContent = "Selected layer: " + label + ". Add a GeoServer WMS URL and layer name to display it.";
 			}
 		} else if (statusNode) {
-			statusNode.textContent = "No overlay selected.";
+			statusNode.textContent = mapNode.dataset.emptyStatus || "No overlay selected.";
 		}
 
 		html += '<div class="map-control-stack">';
@@ -907,9 +907,9 @@
 		var controls = shell.querySelectorAll(".basemap-select, .layer-select");
 
 		if (mapNode) {
-			mapNode.dataset.mapHomeCenterLat = mapNode.dataset.mapHomeCenterLat || String(BULGARIA_CENTER_LAT);
-			mapNode.dataset.mapHomeCenterLng = mapNode.dataset.mapHomeCenterLng || String(BULGARIA_CENTER_LNG);
-			mapNode.dataset.mapHomeZoom = mapNode.dataset.mapHomeZoom || String(BULGARIA_DEFAULT_ZOOM);
+			mapNode.dataset.mapHomeCenterLat = mapNode.dataset.mapHomeCenterLat || mapNode.dataset.mapCenterLat || String(BULGARIA_CENTER_LAT);
+			mapNode.dataset.mapHomeCenterLng = mapNode.dataset.mapHomeCenterLng || mapNode.dataset.mapCenterLng || String(BULGARIA_CENTER_LNG);
+			mapNode.dataset.mapHomeZoom = mapNode.dataset.mapHomeZoom || mapNode.dataset.mapZoom || String(BULGARIA_DEFAULT_ZOOM);
 			mapNode.dataset.mapCenterLat = mapNode.dataset.mapCenterLat || mapNode.dataset.mapHomeCenterLat;
 			mapNode.dataset.mapCenterLng = mapNode.dataset.mapCenterLng || mapNode.dataset.mapHomeCenterLng;
 			mapNode.dataset.mapZoom = mapNode.dataset.mapZoom || mapNode.dataset.mapHomeZoom;

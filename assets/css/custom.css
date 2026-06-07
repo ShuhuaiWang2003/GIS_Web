@@ -495,22 +495,16 @@ button.map-control-button:focus {
 	min-height: 24rem;
 }
 
-.home-gee-app {
+.home-location-map {
 	margin-top: 1.5rem;
 }
 
-.home-gee-app iframe {
-	background: #eef3f6;
-	border: solid 1px #d9dee3;
-	border-radius: 4px;
-	display: block;
-	height: 42rem;
-	width: 100%;
+.home-location-map .pollutant-map-shell {
+	margin: 0;
 }
 
-.home-gee-link {
-	margin: 1rem 0 0 0;
-	text-align: right;
+.home-location-map .pollutant-map {
+	height: 36rem;
 }
 
 .home-study-overview {
@@ -852,7 +846,7 @@ body.image-lightbox-open {
 		max-height: 16rem;
 	}
 
-	.home-gee-app iframe {
+	.home-location-map .pollutant-map {
 		height: 30rem;
 	}
 }
