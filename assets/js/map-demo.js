@@ -372,6 +372,10 @@
 	}
 
 	function getBoundaryLayer(url) {
+		if (typeof window !== "undefined" && window.BULGARIA_BOUNDARY_GEOJSON && /bulgaria-boundary\.geojson(?:$|\?)/.test(url || "")) {
+			return Promise.resolve(window.BULGARIA_BOUNDARY_GEOJSON);
+		}
+
 		if (!BOUNDARY_LAYER_CACHE[url]) {
 			BOUNDARY_LAYER_CACHE[url] = fetch(url).then(function (response) {
 				if (!response.ok) {
