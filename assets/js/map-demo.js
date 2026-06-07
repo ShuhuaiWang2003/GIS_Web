@@ -16,16 +16,16 @@
 			title: "CAMS NO2 2023 12",
 			startColor: "#000000",
 			endColor: "#ffffff",
-			startLabel: "1.12537",
-			endLabel: "24.9375"
+			startLabel: "1.12537 \u00b5g/m\u00b3",
+			endLabel: "24.9375 \u00b5g/m\u00b3"
 		},
 		"assets/legend/no2/average_2023.qml": {
 			type: "gradient",
 			title: "Average NO2 2023",
 			startColor: "#000000",
 			endColor: "#ffffff",
-			startLabel: "1.09367",
-			endLabel: "14.0088"
+			startLabel: "1.09367 \u00b5g/m\u00b3",
+			endLabel: "14.0088 \u00b5g/m\u00b3"
 		},
 		"assets/legend/no2/concentration.sld": {
 			type: "items",
@@ -77,16 +77,16 @@
 			title: "CAMS PM2.5 2023 12",
 			startColor: "#000000",
 			endColor: "#ffffff",
-			startLabel: "2.9502",
-			endLabel: "40.2601"
+			startLabel: "2.9502 \u00b5g/m\u00b3",
+			endLabel: "40.2601 \u00b5g/m\u00b3"
 		},
 		"assets/legend/pm25/average_2023.qml": {
 			type: "gradient",
 			title: "Average PM2.5 2023",
 			startColor: "#000000",
 			endColor: "#ffffff",
-			startLabel: "7.15668",
-			endLabel: "17.5338"
+			startLabel: "7.15668 \u00b5g/m\u00b3",
+			endLabel: "17.5338 \u00b5g/m\u00b3"
 		},
 		"assets/legend/pm25/concentration.qml": {
 			type: "items",
@@ -114,16 +114,16 @@
 			title: "CAMS PM10 2023 12",
 			startColor: "#000000",
 			endColor: "#ffffff",
-			startLabel: "6.88499",
-			endLabel: "36.1638"
+			startLabel: "6.88499 \u00b5g/m\u00b3",
+			endLabel: "36.1638 \u00b5g/m\u00b3"
 		},
 		"assets/legend/pm10/average_2023.qml": {
 			type: "gradient",
 			title: "Average PM10 2023",
 			startColor: "#000000",
 			endColor: "#ffffff",
-			startLabel: "10.5651",
-			endLabel: "23.0106"
+			startLabel: "10.5651 \u00b5g/m\u00b3",
+			endLabel: "23.0106 \u00b5g/m\u00b3"
 		},
 		"assets/legend/pm10/concentration.sld": {
 			type: "items",
