@@ -568,6 +568,10 @@ button.map-control-button:focus {
 	margin-top: 2rem;
 }
 
+.pollutant-output-grid > .pollutant-result-column {
+	margin-top: 0;
+}
+
 .result-empty-note {
 	align-items: center;
 	background: #f4f7f9;
@@ -628,7 +632,11 @@ button.map-control-button:focus {
 }
 
 .result-image-viewer .output-image {
+	box-sizing: border-box;
 	cursor: zoom-in;
+	height: 18rem;
+	max-height: none;
+	object-fit: contain;
 }
 
 .result-image-actions {
@@ -844,6 +852,10 @@ body.image-lightbox-open {
 
 	.output-image {
 		max-height: 16rem;
+	}
+
+	.result-image-viewer .output-image {
+		height: 16rem;
 	}
 
 	.home-location-map .pollutant-map {
