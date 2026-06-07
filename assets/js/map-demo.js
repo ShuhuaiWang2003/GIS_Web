@@ -64,12 +64,12 @@
 		},
 		"assets/legend/no2/zonal%20statistics.sld": {
 			type: "pattern",
-			title: "NO2 Land Cover Zonal Statistics",
+			title: "NO2 Built Area Land Cover Zonal Statistics",
 			label: "Zonal statistics pattern fill"
 		},
 		"assets/legend/no2/zonal statistics.sld": {
 			type: "pattern",
-			title: "NO2 Land Cover Zonal Statistics",
+			title: "NO2 Built Area Land Cover Zonal Statistics",
 			label: "Zonal statistics pattern fill"
 		},
 		"assets/legend/pm25/cams.qml": {
@@ -95,6 +95,19 @@
 				{ color: "#d9e6f7", label: "Level 1 (<=5 ug/m3)" },
 				{ color: "#a9c4e8", label: "Level 2 (>5 and <=10 ug/m3)" }
 			]
+		},
+		"assets/legend/pm25/chart.sld": {
+			type: "items",
+			title: "PM2P5 POPULATION CHART",
+			items: [
+				{ color: "#ffffff", label: "Class 1 (\u22645 \u00b5g/m\u00b3)" },
+				{ color: "#e0ffff", label: "Class 2 (>5 and \u226410 \u00b5g/m\u00b3)" }
+			]
+		},
+		"assets/legend/pm25/zonal-statistics.sld": {
+			type: "pattern",
+			title: "PM2P5 Crops Land Cover Zonal Statistics",
+			label: "Zonal statistics pattern fill"
 		},
 		"assets/legend/pm10/2023_12.qml": {
 			type: "gradient",
@@ -127,6 +140,11 @@
 				{ color: "#fffffe", label: "Class 1 (\u226415 \u00b5g/m\u00b3)" },
 				{ color: "#ddfffd", label: "Class 2 (15\u201331 \u00b5g/m\u00b3)" }
 			]
+		},
+		"assets/legend/pm10/zonal-statistics.sld": {
+			type: "pattern",
+			title: "PM10 Trees Land Cover Zonal Statistics",
+			label: "Zonal statistics pattern fill"
 		},
 		"assets/legend/lcc/esri_10m_lcc_legend.qml": {
 			type: "items",
