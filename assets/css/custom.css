@@ -639,6 +639,10 @@ button.map-control-button:focus {
 	object-fit: contain;
 }
 
+.population-analysis-section .result-image-viewer .output-image {
+	height: 12.5rem;
+}
+
 .result-image-actions {
 	display: flex;
 	justify-content: flex-end;
@@ -890,6 +894,10 @@ body.image-lightbox-open {
 
 	.result-image-viewer .output-image {
 		height: 16rem;
+	}
+
+	.population-analysis-section .result-image-viewer .output-image {
+		height: 11rem;
 	}
 
 	.home-location-map .pollutant-map {
