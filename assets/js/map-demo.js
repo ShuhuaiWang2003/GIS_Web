@@ -10,6 +10,7 @@
 	var MAX_ZOOM = 12;
 	var MAX_WEB_MERCATOR_LAT = 85.05112878;
 	var SLD_LEGEND_CACHE = {};
+	var GEOJSON_LAYER_CACHE = {};
 	var LOCAL_SLD_LEGENDS = {
 		"assets/legend/no2/2023_12.qml": {
 			type: "gradient",
@@ -370,6 +371,135 @@
 		return baseUrl + (baseUrl.indexOf("?") === -1 ? "?" : "&") + params.toString();
 	}
 
+	function getGeoJsonLayer(url) {
+		if (!GEOJSON_LAYER_CACHE[url]) {
+			GEOJSON_LAYER_CACHE[url] = fetch(url).then(function (response) {
+				if (!response.ok) {
+					throw new Error("GeoJSON layer not found");
+				}
+
+				return response.json();
+			});
+		}
+
+		return GEOJSON_LAYER_CACHE[url];
+	}
+
+	function formatPathNumber(value) {
+		return String(Math.round(value * 10) / 10);
+	}
+
+	function coordinateToPathPoint(coordinate, geometry) {
+		var world = lonLatToWorld(coordinate[0], coordinate[1], geometry.zoom);
+
+		return formatPathNumber(world.x - geometry.topLeft.x) + " " + formatPathNumber(world.y - geometry.topLeft.y);
+	}
+
+	function ringToSvgPath(ring, geometry) {
+		var path = "";
+
+		if (!ring || ring.length < 3) {
+			return "";
+		}
+
+		ring.forEach(function (coordinate, index) {
+			path += (index === 0 ? "M" : "L") + coordinateToPathPoint(coordinate, geometry);
+		});
+
+		return path + "Z";
+	}
+
+	function polygonToSvgPath(polygon, geometry) {
+		return (polygon || []).map(function (ring) {
+			return ringToSvgPath(ring, geometry);
+		}).join("");
+	}
+
+	function featureToSvgPath(feature, geometry) {
+		var featureGeometry = feature.geometry || {};
+
+		if (featureGeometry.type === "Polygon") {
+			return polygonToSvgPath(featureGeometry.coordinates, geometry);
+		}
+
+		if (featureGeometry.type === "MultiPolygon") {
+			return (featureGeometry.coordinates || []).map(function (polygon) {
+				return polygonToSvgPath(polygon, geometry);
+			}).join("");
+		}
+
+		return "";
+	}
+
+	function getLocalZonalFeatureTitle(feature) {
+		var properties = feature.properties || {};
+		var zone = properties.Zone || properties.zone || "";
+		var mean = typeof properties.zone_mean === "number" ? properties.zone_mean.toFixed(2) : "";
+
+		return "Zone " + zone + (mean ? ", mean " + mean : "");
+	}
+
+	function buildGeoJsonLayerSvg(data, geometry, label, patternId) {
+		var paths = (data.features || []).map(function (feature) {
+			var path = featureToSvgPath(feature, geometry);
+
+			if (!path) {
+				return "";
+			}
+
+			return '<path d="' + path + '" fill="url(#' + patternId + ')" fill-rule="evenodd" stroke="#232323" stroke-width="1.1" vector-effect="non-scaling-stroke"><title>' + escapeHtml(getLocalZonalFeatureTitle(feature)) + "</title></path>";
+		}).join("");
+
+		return '<svg class="simple-map-vector-overlay" role="img" aria-label="' + escapeHtml(label) + '" viewBox="0 0 ' + Math.round(geometry.width) + " " + Math.round(geometry.height) + '" preserveAspectRatio="none">'
+			+ '<defs><pattern id="' + patternId + '" patternUnits="userSpaceOnUse" width="8" height="8"><path d="M-2 2L2 -2M0 8L8 0M6 10L10 6" stroke="#232323" stroke-width="1" opacity="0.85"/></pattern></defs>'
+			+ '<g opacity="0.92">' + paths + "</g></svg>";
+	}
+
+	function renderGeoJsonLayer(mapNode, statusNode, geoJsonUrl, label, geometry) {
+		var token = String(Date.now()) + String(Math.random());
+		var patternId = "local-zonal-pattern-" + (mapNode.id || "map").replace(/[^a-z0-9_-]/gi, "");
+		var loadingNode = mapNode.querySelector(".map-loading");
+
+		mapNode.dataset.geojsonToken = token;
+		updateLoadingProgress(mapNode, 15);
+
+		if (statusNode) {
+			statusNode.textContent = "Loading local WebGIS layer: " + label + " (15%)";
+		}
+
+		getGeoJsonLayer(geoJsonUrl).then(function (data) {
+			if (mapNode.dataset.geojsonToken !== token) {
+				return;
+			}
+
+			updateLoadingProgress(mapNode, 75);
+			mapNode.insertAdjacentHTML("beforeend", buildGeoJsonLayerSvg(data, geometry, label, patternId));
+			updateLoadingProgress(mapNode, 100);
+
+			if (statusNode) {
+				statusNode.textContent = "Displaying local WebGIS layer: " + label;
+			}
+
+			window.setTimeout(function () {
+				if (mapNode.dataset.geojsonToken === token && loadingNode) {
+					loadingNode.hidden = true;
+				}
+			}, 350);
+		}).catch(function () {
+			if (mapNode.dataset.geojsonToken !== token) {
+				return;
+			}
+
+			if (loadingNode) {
+				loadingNode.hidden = true;
+			}
+
+			if (statusNode) {
+				statusNode.textContent = "Local WebGIS layer could not be loaded: " + label;
+			}
+		});
+	}
+
 	function getLegendNode(mapNode) {
 		var legendNode = mapNode.querySelector(".map-legend");
 
@@ -669,6 +799,7 @@
 		var label = selectedOption ? selectedOption.dataset.label || selectedOption.textContent : "";
 		var layerName = selectedOption ? selectedOption.dataset.layer || "" : "";
 		var geoserverUrl = selectedOption ? selectedOption.dataset.geoserverUrl || "" : "";
+		var geoJsonUrl = selectedOption ? selectedOption.dataset.geojsonUrl || "" : "";
 		var styleName = selectedOption ? selectedOption.dataset.style || "" : "";
 		var legendImageUrl = selectedOption ? selectedOption.dataset.legendImage || "" : "";
 		var legendSldUrl = selectedOption ? selectedOption.dataset.legendSld || "" : "";
@@ -680,6 +811,7 @@
 		var boundsSouthEast = worldToLonLat(geometry.bottomRight.x, geometry.bottomRight.y, geometry.zoom);
 		var html = "";
 		var scaleLine = getScaleLine(geometry.centerLat, geometry.zoom);
+		var shouldRenderGeoJsonLayer = selectedOption && selectedOption.value !== "none" && geoJsonUrl && !isPanning;
 
 		for (var tileX = startTileX; tileX <= endTileX; tileX += 1) {
 			for (var tileY = startTileY; tileY <= endTileY; tileY += 1) {
@@ -705,6 +837,14 @@
 		} else if (selectedOption && selectedOption.value !== "none" && geoserverUrl && layerName && isPanning) {
 			if (statusNode) {
 				statusNode.textContent = "Release the map to reload GeoServer WMS layer: " + layerName;
+			}
+		} else if (shouldRenderGeoJsonLayer) {
+			if (statusNode) {
+				statusNode.textContent = "Loading local WebGIS layer: " + label + " (0%)";
+			}
+		} else if (selectedOption && selectedOption.value !== "none" && geoJsonUrl && isPanning) {
+			if (statusNode) {
+				statusNode.textContent = "Release the map to redraw local WebGIS layer: " + label;
 			}
 		} else if (selectedOption && selectedOption.value !== "none") {
 			if (statusNode) {
@@ -740,6 +880,10 @@
 		}
 
 		trackMapImageLoading(mapNode, statusNode, isPanning ? "" : layerName);
+
+		if (shouldRenderGeoJsonLayer) {
+			renderGeoJsonLayer(mapNode, statusNode, geoJsonUrl, label, geometry);
+		}
 	}
 
 	function updateMousePosition(shell, event) {
